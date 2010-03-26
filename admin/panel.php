@@ -1,0 +1,41 @@
+<style type="text/css">
+<!--
+a:link {
+	color: #009;
+}
+-->
+</style><?php 
+/*******************************************************************************
+********************************************************************************
+***                                                                          ***
+***   Filename: panel.php                                                    ***
+***   Use: Include all the elements needed to display the panel              ***
+***   Author: Al Wilde                                                       ***
+***                                                                          ***
+********************************************************************************
+*******************************************************************************/
+include("lib/config.php"); 
+include("lib/functions.php"); 
+include("help/popups.php");
+
+if(isset($_COOKIE['View_Panel_ID'])) 
+{ 
+$username = $_COOKIE['View_Panel_ID']; 
+$pass = $_COOKIE['View_Panel_Key']; 
+$check = mysql_query("SELECT * FROM users WHERE username = '$username'")or die(mysql_error()); 
+while($info = mysql_fetch_array( $check )) 
+{ 
+if ($pass != $info['password']) 
+{ header("Location: login.php"); 
+} 
+else 
+{ 
+include("themes/viewpanel/theme.php");	  
+}
+} 
+} 
+else 
+{ 
+header("Location: login.php"); 
+} 
+?> 

@@ -1,0 +1,12 @@
+Change Log
+
+===Version 2.3.2===
+Added theme support.
+Fixed a typo on the edit posts page.
+Updated blog remove script.
+Added the ability to make Panel users.
+
+===Version 2.3.1===
+Fixed the bug about the edit posts page not showing up.
+Removed config version.
+Added fields and folder structure for blog themes.

@@ -1,0 +1,4 @@
+View Panel is free and open source software provided with no warrenty. If something goes wrong, it's your own fault. View Panel's developers have nothing to do with it - unless the offending code was put in there on purpose with intent to cause harm.
+
+=====Licenses=====
+GNU General Public License v3
