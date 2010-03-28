@@ -1,10 +1,4 @@
-<style type="text/css">
-<!--
-a:link {
-	color: #009;
-}
--->
-</style><?php 
+<?php 
 /*******************************************************************************
 ********************************************************************************
 ***                                                                          ***
@@ -14,9 +8,9 @@ a:link {
 ***                                                                          ***
 ********************************************************************************
 *******************************************************************************/
+ob_start();
+
 include("lib/config.php"); 
-include("lib/functions.php"); 
-include("help/popups.php");
 
 if(isset($_COOKIE['View_Panel_ID'])) 
 { 
@@ -30,7 +24,7 @@ if ($pass != $info['password'])
 } 
 else 
 { 
-include("themes/viewpanel/theme.php");	  
+include("themes/viewpanel/theme.php"); 
 }
 } 
 } 
@@ -38,4 +32,4 @@ else
 { 
 header("Location: login.php"); 
 } 
-?> 
+?>

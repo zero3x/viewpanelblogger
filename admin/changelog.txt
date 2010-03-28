@@ -1,5 +1,12 @@
 Change Log
 
+===Version 2.4 Alpha===
+New panel theme.
+Compacted installer into one file.
+Removed Database manager and replaced with User manager. 
+Made news feed compatible with new theme.
+Improved help pop up file.
+
 ===Version 2.3.2===
 Added theme support.
 Fixed a typo on the edit posts page.
@@ -10,3 +17,6 @@ Added the ability to make Panel users.
 Fixed the bug about the edit posts page not showing up.
 Removed config version.
 Added fields and folder structure for blog themes.
+
+===Version 2.3.0===
+Fist public release.

@@ -30,7 +30,7 @@ if(isset($_COOKIE['View_Panel_ID'])) {
     while($info = mysql_fetch_array( $check )) {
        if ($pass != $info['password']) {
          } else {
-             header("Location: panel.php?home=1");
+             header("Location: panel.php?page=home");
 			 }
 			 }
 			 }
@@ -60,7 +60,7 @@ $hour = time() + 3600;
 setcookie("View_Panel_ID", $_POST['username'], $hour, "/"); 
 setcookie("View_Panel_Key", $_POST['pass'], $hour, "/"); 
 
-header("Location: panel.php?home=1"); 
+header("Location: panel.php?page=home"); 
 } 
 } 
 } 
