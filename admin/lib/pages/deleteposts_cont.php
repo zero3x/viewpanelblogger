@@ -2,8 +2,6 @@
 $tablename = $_POST['page'];
 $tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
 ?>
-
-<div id="apDiv1">
     <h1>Delete Posts</h1>
     <p>Want to get rid of a post you've made? You're on the right page...</p>
     <form id="form1" name="form1" method="post" action=<?php echo "lib/scripts/delpost.php?tablename=".$tablenameclean.""; ?> >
@@ -37,6 +35,6 @@ echo '</tr>';
 }
 echo '</table>'; 
   ?>
-</div>
+
 
 

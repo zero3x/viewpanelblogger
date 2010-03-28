@@ -1,5 +1,5 @@
 <?php
-include("../lib/config.php");
+include("../config.php");
 if (!$_POST['username'] | !$_POST['password'] | !$_POST['password2'] | !$_POST['email'] | !$_POST['firstname'] | !$_POST['lastname'] ) {
 die('You did not complete all of the required fields. Please go back and try again.');
 }
@@ -32,6 +32,6 @@ mysql_query($insert);
 
 mysql_close($con);
 
-echo "<p>User creation complete. Click <a href='../login.php'>here</a> to return to the login page.</p>"
+echo "<p>User creation complete. Click <a href='../../login.php'>here</a> to return to the login page.</p>"
 
 ?>

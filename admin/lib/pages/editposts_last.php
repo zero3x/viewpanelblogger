@@ -7,8 +7,6 @@ $output = mysql_query($sql) or die(mysql_error());
 $row = mysql_fetch_array($output)
 
 ?>
-
-<div id="apDiv1">
     <h1>Edit Posts</h1>
     <p>Made a typo in a post? Want to fix it? Look no further than this page...</p>
     <form id="form1" name="form1" method="post" action=<?php echo "lib/scripts/editpost.php?id=".$idtoedit."&tablename=".$tablenameclean.""; ?> >
@@ -29,6 +27,6 @@ $row = mysql_fetch_array($output)
         </label>
       </p>
   </form>
-</div>
+
 
 

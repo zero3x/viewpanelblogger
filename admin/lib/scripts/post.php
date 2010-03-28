@@ -9,7 +9,7 @@
 ***                                                                          ***
 ********************************************************************************
 *******************************************************************************/
-include("../lib/config.php");
+include("../config.php");
 include("../lib/functions.php");
 
 //GET TEH TIME!
@@ -28,5 +28,5 @@ if (!mysql_query($sql,$con))
   }
 
 View_Panel_MySQL_Kill();
-echo "<p>Blog post complete. Click <a href='../login.php'>here</a> to return to the login page.</p>"
+echo "<p>Blog post complete. Click <a href='../../login.php'>here</a> to return to the login page.</p>"
 ?> 

@@ -1,7 +1,4 @@
 
-
-<div id="apDiv1">
-		  <div>
 		    <h1>Blog Settings</h1>
 		    <p>Change your blog information.		    </p>
 		    <form id="form1" name="form1" method="post" action="">
@@ -11,6 +8,3 @@
 	            </select>
 	          </label>
 	        </form>
-<p>&nbsp;</p>
-		  </div>
-		</div>

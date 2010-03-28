@@ -8,7 +8,7 @@
 ***                                                                          ***
 ********************************************************************************
 *******************************************************************************/
-include("../lib/config.php");
+include("../config.php");
 if ($_POST["fileviewer_enabled"] == "enabled") {
 	$fileviewer = "enabled";
 } else {
@@ -29,7 +29,7 @@ $databasename = $_POST["databasename"];
 
 //Write variables
 $encryptpass = base64_encode($newmysqlpass);
-$dbfilehandle = fopen("../lib/databasesettings.php","w");
+$dbfilehandle = fopen("../databasesettings.php","w");
 $dbvariableshandle = "<?php \n
 \$dbuser='".$newmysqluser."'; \n
 \$dbpass ='".$encryptpass."'; \n
@@ -39,9 +39,9 @@ $dbvariableshandle = "<?php \n
 \$timeoffset ='".$timeoffset."'; \n
 \$fileview_enabled ='".$fileviewer."'; \n
 \$databaseview_enabled ='".$databaseviewer."'; \n
-?> \n";
+?>";
 fwrite($dbfilehandle, $dbvariableshandle); 
 fclose($dbfilehandle);
 
-echo "<p>Settings saved. Click <a href='../login.php'>here</a> to return to the login page.</p>"
+echo "<p>Settings saved. Click <a href='../../login.php'>here</a> to return to the login page.</p>"
 ?>

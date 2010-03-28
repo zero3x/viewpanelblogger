@@ -1,4 +1,4 @@
-<div id="apDiv1">
+
     <h1>Edit Posts</h1>
     <p>Made a typo in a post? Want to fix it? Look no further than this page...</p>
     <form id="form1" name="form1" method="post" action="panel.php?editblog=5">
@@ -13,6 +13,6 @@
         </label>
       </p>
   </form>
-</div>
+
 
 

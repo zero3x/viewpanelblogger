@@ -34,7 +34,7 @@ $array = array();
     closedir($handle);
 
 	@rmdir($dir);
-}
+} 
 }
 
 function copydir( $source, $target ) {

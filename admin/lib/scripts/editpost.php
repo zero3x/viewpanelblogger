@@ -1,5 +1,5 @@
 <?php
-include("../lib/config.php");
+include("../config.php");
 
 $tablenameclean = $_GET['tablename'];
 $idtoedit = $_GET['id'];
@@ -15,6 +15,6 @@ echo "Post edited.<br \>";
 
 View_Panel_MySQL_Kill();
 
-echo "<p>Post edited. Click <a href='../login.php'>here</a> to return to the login page.</p>";
+echo "<p>Post edited. Click <a href='../../login.php'>here</a> to return to the login page.</p>";
 
 ?>

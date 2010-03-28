@@ -1,48 +1,16 @@
-<html>
-<script>
-function basicsettings_help()
-{
-  var generator=window.open('','Basic Settings','height=400,width=500');
-  
-  generator.document.write('<html><head><title>Basic Settings</title>');
-  generator.document.write('</head><body>');
-  generator.document.write('<p>Basic settings are the settings that must be filled out. Without them the thing you are trying to do             just will not work!</p>');
-  generator.document.write('</body></html>');
-  generator.document.close();
-}
-
-function advancedsettings_help()
-{
-  var generator=window.open('','Advanced Settings','height=400,width=500');
-  
-  generator.document.write('<html><head><title>Advanced Settings</title>');
-  generator.document.write('</head><body>');
-  generator.document.write('<p>Advanced settings do not need to be filled out and your script will work just fine without them. It is            not advised you touch them unless you know basic PHP and HTML.</p>');
-  generator.document.write('</body></html>');
-  generator.document.close();
-}
-
-function borderwidth_help()
-{
-  var generator=window.open('','The Border Width','height=400,width=500');
-  
-  generator.document.write('<html><head><title>The Border Width</title>');
-  generator.document.write('</head><body>');
-  generator.document.write('<p>The Border Width is the width (in pixels) of your table border. 0 means the border will be invisible.             </p>');
-  generator.document.write('</body></html>');
-  generator.document.close();
-}
-
-function mysqltable_help()
-{
-  var generator=window.open('','Choosing A MySQL Table','height=400,width=500');
-  
-  generator.document.write('<html><head><title>Choosing A MySQL Table</title>');
-  generator.document.write('</head><body>');
-  generator.document.write('<p>The MySQL table stores all your posts - so select the table with the correct posts in.</p>');
-  generator.document.write('</body></html>');
-  generator.document.close();
-}
-
-</script>
-</html>
+<p><a name="url"></a><strong>Website Address</strong>. <a href="help/popups.php#url" onclick="window.open('help/popups.php#url','popup','width=500,height=500,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"></a></p>
+<p>This is the link you are directed to when you click &quot;View Site&quot;.</p>
+<p><strong><a name="mysqluser"></a>MySQL Username</strong></p>
+<p>This is the username you use to connect with your MySQL database.</p>
+<p><strong><a name="mysqlpass"></a>MySQL Password</strong></p>
+<p>This is the password you use to connect with your MySQL database. Password not shown for security.</p>
+<p><strong><a name="mysqldata"></a>MySQL Database Location</strong></p>
+<p>This is the location of your database. If you're not sure ask your webhost. It's usually localhost.</p>
+<p><strong><a name="mysqldataname"></a>MySQL Database Name</strong></p>
+<p>The name of your database. You can usually leave this as it is.</p>
+<p><strong><a name="filemanagerenabled"></a>File Manager Enabled</strong></p>
+<p>Enable or disable the ability to use the file manager for all users.</p>
+<p><strong><a name="usermanagerenabled"></a>User Manager Enabled</strong></p>
+<p>Enable or disable the ability to use the user viewer for all users.</p>
+<p><strong><a name="save"></a>Save</strong></p>
+<p>Clicking this will make View Panel remember your changes.</p>

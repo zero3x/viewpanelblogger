@@ -1,8 +1,4 @@
-
-
-<div id="apDiv1">
-		  <div>
-		    <h1>About View Panel</h1>
+<h1>About View Panel</h1>
 		    <h2>Tech Info</h2>
             <?php
 		    echo "Using Panel Version: " . $panelversion . "<br />";
@@ -23,5 +19,3 @@ readfile("http://streeteye.info/viewpanel/versiontracker/viewpanelversiontracker
 		    <p>&nbsp;</p>
 		    <p>Copyright Al Wilde 2009. All rights reserved.</p>
 		    <p>&nbsp;</p>
-		  </div>
-		</div>

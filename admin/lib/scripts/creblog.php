@@ -8,7 +8,7 @@
 ***                                                                          ***
 ********************************************************************************
 *******************************************************************************/
-include("../lib/config.php");
+include("../config.php");
 $tablename = $_POST["tablename"];
 $tabledesc = $_POST["describetable"];
 $theme = $_POST["theme"];
@@ -63,5 +63,5 @@ fwrite($infofilewrite, $infofile);
 fclose($infofilewrite);
 
 echo "Your blog URL is VIEWPANEL'S BASE DIRECTORY/".$tablenameclean."";
-echo "<p>Blog creation complete. Click <a href='../login.php'>here</a> to return to the login page.</p>"
+echo "<p>Blog creation complete. Click <a href='../../login.php'>here</a> to return to the login page.</p>"
 ?>

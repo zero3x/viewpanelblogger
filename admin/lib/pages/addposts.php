@@ -1,5 +1,4 @@
-<title>View Panel @: Edit Pages</title><div id="apDiv1">
-		  <div>
+
 		    <h1>Add A Post</h1>
 		    <p>This page allows you to easily add a post to your blog.		    </p>
 		    <form name="form1" method="post" action="lib/scripts/post.php">
@@ -26,6 +25,3 @@
 	            </blockquote>
 		      </label>
 		    </form>
-		    <p>&nbsp;</p>
-		  </div>
-		</div>

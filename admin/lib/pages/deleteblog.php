@@ -1,5 +1,4 @@
-<title>View Panel @: Edit Pages</title><div id="apDiv1">
-		  <div>
+
 		    <h1>Delete A Blog</h1>
 		    <p>Want your blog to go bye bye? Then fill out this form.</p>
 		    <form name="form1" method="post" action="lib/scripts/delblog.php">
@@ -28,6 +27,3 @@
 	            </blockquote>
 		      </label>
 		    </form>
-		    <p>&nbsp;</p>
-		  </div>
-		</div>

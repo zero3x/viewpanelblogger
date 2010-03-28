@@ -1,15 +1,2 @@
-
-<?php
-if (isset($_POST['submit'])) { 
-    $toscan = $_GET["dirtoread"]; 
-    $output = scandir($toscan);
-}
-?>
-<div id="apDiv1">
-  <div>
-    <h1>File Viewer</h1>
-    <p>Coming soon.</p>
-</div>
-</div>
-</body>
-</html>
+<h1>File Manager</h1>
+    <p>When completed the file manager will allow you to upload files and attach them to your blog posts.</p>

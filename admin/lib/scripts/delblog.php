@@ -1,5 +1,5 @@
 <?php 
-include("../lib/config.php");
+include("../config.php");
 
 if ($_POST["sure"] == "Yes" | $_POST["sure"] == "yes") {
 if (!$_POST["table"]) {
@@ -32,7 +32,7 @@ View_Panel_MySQL_Kill();
 
 destroydir("../../".$tablenameclean."/");
 
-echo "<p>Blog deleted. Click <a href='../login.php'>here</a> to return to the login page.</p>";
+echo "<p>Blog deleted. Click <a href='../../login.php'>here</a> to return to the login page.</p>";
 } else {
 	echo "It seems you don't want to delete the blog as you did not type 'Yes' or 'yes' in the confirm box.";
 }

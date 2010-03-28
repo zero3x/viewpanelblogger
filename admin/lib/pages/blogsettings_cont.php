@@ -1,7 +1,4 @@
 
-
-<div id="apDiv1">
-		  <div>
 		    <h1>Blog Settings</h1>
 		    <p>Change your blog information.	USE	readfile on blog create! </p>
 		    <form id="form1" name="form1" method="post" action="">
@@ -34,5 +31,3 @@
                 </label>
 them. </p>
 		    </form>
-		  </div>
-		</div>
