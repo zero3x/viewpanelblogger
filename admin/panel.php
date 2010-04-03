@@ -24,7 +24,7 @@ if ($pass != $info['password'])
 } 
 else 
 { 
-include("themes/viewpanel/theme.php"); 
+include("lib/core_theme/theme.php"); 
 }
 } 
 } 

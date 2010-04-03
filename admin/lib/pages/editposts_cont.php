@@ -4,7 +4,7 @@ $tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
 ?>
     <h1>Edit Posts</h1>
     <p>Made a typo in a post? Want to fix it? Look no further than this page...</p>
-    <form id="form1" name="form1" method="post" action=<?php echo "panel.php?editblog=6&tablename=".$tablenameclean.""; ?> >
+    <form id="form1" name="form1" method="post" action=<?php echo "panel.php?page=editposts_last&tablename=".$tablenameclean.""; ?> >
       <p>1. Enter the ID of the post you want to edit: 
         <label>
           <input type="text" name="postid" id="postid" />

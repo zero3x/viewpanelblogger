@@ -8,6 +8,9 @@
 ***                                                                          ***
 ********************************************************************************
 *******************************************************************************/
+
+//TODO: Instead of copying the theme make an iclude file to it.
+
 include("../config.php");
 $tablename = $_POST["tablename"];
 $tabledesc = $_POST["describetable"];
@@ -38,27 +41,35 @@ mysql_query($insert,$con);
 View_Panel_MySQL_Kill();
 
 //Make the base blog files
-mkdir("../../".$tablenameclean."", 0777);
+mkdir("../../../".$tablenameclean."", 0777);
 
-$blogtemplate = file_get_contents("res/".$theme.".php");
-$blogfilewrite = fopen("../../".$tablenameclean."/post_content.php","w");
-fwrite($blogfilewrite, $blogtemplate);
-fclose($blogfilewrite);
+//$blogtemplate = file_get_contents("../../themes/".$theme."/.php");
+//$blogfilewrite = fopen("../../".$tablenameclean."/post_content.php","w");
+//fwrite($blogfilewrite, $blogtemplate);
+//fclose($blogfilewrite);
 
-//Copy selected theme.
-$source = "../themes/blogs/".$theme."";
-$dest = "../../".$tablenameclean."";
-copydir($source, $dest);
+//Copy selected theme. - Not used as of 2.4
+//$source = "../../themes/blogs/".$theme."";
+//$dest = "../../../".$tablenameclean."";
+//copydir($source, $dest);
+
+//Write theme include
+$infofile = "<?php
+include('lib/info.php');
+include('../admin/themes/".$theme."/index.php');
+?>";
+$infofilewrite = fopen("../../../".$tablenameclean."/index.php","w");
+fwrite($infofilewrite, $infofile);
+fclose($infofilewrite);
 
 //Write information file
-mkdir("../../".$tablenameclean."/lib", 0777);
-$infofile = "
-<?php
+mkdir("../../../".$tablenameclean."/lib", 0777);
+$infofile = "<?php
 \$blogname = '".$tablename."';
 \$blogdesc = '".$tabledesc."';
 \$tablenameclean = preg_replace('/[^a-zA-Z0-9]/', '', '".$tablename."');
 ?>";
-$infofilewrite = fopen("../../".$tablenameclean."/lib/info.php","w");
+$infofilewrite = fopen("../../../".$tablenameclean."/lib/info.php","w");
 fwrite($infofilewrite, $infofile);
 fclose($infofilewrite);
 

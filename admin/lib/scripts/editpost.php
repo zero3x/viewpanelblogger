@@ -3,8 +3,9 @@ include("../config.php");
 
 $tablenameclean = $_GET['tablename'];
 $idtoedit = $_GET['id'];
+$editbox = nl2br($_POST['edit']);
 
-$sql="UPDATE $tablenameclean SET post='".$_POST[edit]."', author='".$_POST[author]."' WHERE id = '$idtoedit'";
+$sql="UPDATE $tablenameclean SET post='".$editbox."', author='".$_POST[author]."' WHERE id = '$idtoedit'";
 
 $handle = mysql_query($sql, $con );
 if(!$handle)
