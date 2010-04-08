@@ -55,8 +55,8 @@ mkdir("../../../".$tablenameclean."", 0777);
 
 //Write theme include
 $infofile = "<?php
-include('lib/config.php');
-include('../admin/themes/".$theme."/index.php');
+include_once('lib/config.php');
+include_once('../admin/themes/".$theme."/theme.php');
 ?>";
 $infofilewrite = fopen("../../../".$tablenameclean."/index.php","w");
 fwrite($infofilewrite, $infofile);
