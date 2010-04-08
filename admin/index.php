@@ -11,7 +11,7 @@
 *******************************************************************************/
 if (file_exists("lib/installcomplete.txt")) {
 
-include("lib/config.php");
+include_once("lib/config.php");
 
 if(isset($_COOKIE['View_Panel_ID'])) 
 { 

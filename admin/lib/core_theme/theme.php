@@ -41,6 +41,7 @@
          <li><a href="?page=addposts">Add Posts</a></li>
 		 <li><a href="?page=editposts">Edit Posts</a></li>
 		 <li><a href="?page=deleteposts">Delete Posts</a></li>
+         <li><a href="?page=editintro">Edit Introduction</a></li>
 		 <li><a href="?page=createblog">New Blog</a></li>
 		 <li><a href="?page=deleteblog">Remove Blog</a></li>
          </ul> <!-- Dropdown End -->

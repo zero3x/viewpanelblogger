@@ -11,7 +11,7 @@
 
 //TODO: Instead of copying the theme make an iclude file to it.
 
-include("../config.php");
+include_once("../config.php");
 $tablename = $_POST["tablename"];
 $tabledesc = $_POST["describetable"];
 $theme = $_POST["theme"];
@@ -55,7 +55,7 @@ mkdir("../../../".$tablenameclean."", 0777);
 
 //Write theme include
 $infofile = "<?php
-include('lib/info.php');
+include('lib/config.php');
 include('../admin/themes/".$theme."/index.php');
 ?>";
 $infofilewrite = fopen("../../../".$tablenameclean."/index.php","w");
@@ -69,7 +69,7 @@ $infofile = "<?php
 \$blogdesc = '".$tabledesc."';
 \$tablenameclean = preg_replace('/[^a-zA-Z0-9]/', '', '".$tablename."');
 ?>";
-$infofilewrite = fopen("../../../".$tablenameclean."/lib/info.php","w");
+$infofilewrite = fopen("../../../".$tablenameclean."/lib/config.php","w");
 fwrite($infofilewrite, $infofile);
 fclose($infofilewrite);
 

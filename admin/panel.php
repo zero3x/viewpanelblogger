@@ -10,7 +10,7 @@
 *******************************************************************************/
 ob_start();
 
-include("lib/config.php"); 
+include_once("lib/config.php"); 
 
 if(isset($_COOKIE['View_Panel_ID'])) 
 { 
@@ -24,7 +24,7 @@ if ($pass != $info['password'])
 } 
 else 
 { 
-include("lib/core_theme/theme.php"); 
+include_once("lib/core_theme/theme.php"); 
 }
 } 
 } 

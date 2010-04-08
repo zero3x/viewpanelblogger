@@ -13,6 +13,8 @@ if ($page == "home") {
            include('lib/pages/editposts.php');
 	  } elseif ($page == "deleteposts") {
            include('lib/pages/deleteposts.php');
+	   } elseif ($page == "editintro") {
+           include('lib/pages/editintro.php');
       } elseif ($page == "deleteposts_next") {
            include('lib/pages/deleteposts_cont.php');
       } elseif ($page == "editposts_next") {
