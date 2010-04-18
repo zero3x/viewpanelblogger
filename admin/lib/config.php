@@ -37,5 +37,4 @@ mysql_select_db($dbname) or die(mysql_error());
 function View_Panel_MySQL_Kill() {
 	mysql_close($con);
 }
-
 ?>

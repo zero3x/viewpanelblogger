@@ -190,6 +190,7 @@ if( isset($_GET['action']) ) {
 		
 		mysql_close($con);
 		
+		chmod("../lib", 0755);
 		
 		$installdonefile = fopen("../lib/installcomplete.txt","w");
 		$surlcontent = "DO NOT DELETE ME!";

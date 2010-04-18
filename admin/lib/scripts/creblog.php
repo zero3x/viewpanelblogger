@@ -11,7 +11,7 @@
 
 //TODO: Instead of copying the theme make an iclude file to it.
 
-include_once("../config.php");
+include("../config.php");
 $tablename = $_POST["tablename"];
 $tabledesc = $_POST["describetable"];
 $theme = $_POST["theme"];
@@ -21,6 +21,13 @@ die('You did not complete all of the required fields. Please go back and try aga
 }
 
 $tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
+$tablenameclean = strtolower($tablenameclean);
+
+$sql="SELECT * FROM $tablenameclean";
+$result =  @mysql_query($sql);
+if ($result) {
+die ("ERROR: There is already a blog of this name.");
+}
 
 $sql = "CREATE TABLE $tablenameclean
 (
@@ -55,8 +62,9 @@ mkdir("../../../".$tablenameclean."", 0777);
 
 //Write theme include
 $infofile = "<?php
-include_once('lib/config.php');
-include_once('../admin/themes/".$theme."/theme.php');
+include('lib/config.php');
+include('../admin/lib/config.php');
+include('../admin/themes/".$theme."/theme.php');
 ?>";
 $infofilewrite = fopen("../../../".$tablenameclean."/index.php","w");
 fwrite($infofilewrite, $infofile);
@@ -68,6 +76,7 @@ $infofile = "<?php
 \$blogname = '".$tablename."';
 \$blogdesc = '".$tabledesc."';
 \$tablenameclean = preg_replace('/[^a-zA-Z0-9]/', '', '".$tablename."');
+\$tablenameclean = strtolower(\$tablenameclean);
 ?>";
 $infofilewrite = fopen("../../../".$tablenameclean."/lib/config.php","w");
 fwrite($infofilewrite, $infofile);

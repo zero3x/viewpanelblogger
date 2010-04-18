@@ -11,7 +11,7 @@
 *******************************************************************************/
 if (file_exists("lib/installcomplete.txt")) {
 
-include_once("lib/config.php");
+include("lib/config.php");
 
 if(isset($_COOKIE['View_Panel_ID'])) 
 { 
@@ -25,7 +25,7 @@ if ($pass != $info['password'])
 } 
 else 
 { 
-header("Location: panel.php?home=1");
+header("Location: panel.php?page=home");
 }
 } 
 } 

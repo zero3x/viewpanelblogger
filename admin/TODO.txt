@@ -1,2 +1,4 @@
 Give each post its own page.
-Move control panel theme into core_theme folder.
+Add support for blog introductions.
+Add support for sidebars.
+Add user signup.

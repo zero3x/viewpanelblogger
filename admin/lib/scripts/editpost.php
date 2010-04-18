@@ -1,7 +1,9 @@
 <?php
 include("../config.php");
 
-$tablenameclean = $_GET['tablename'];
+$tablename = $_GET['tablename'];
+$tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
+$tablenameclean = strtolower($tablenameclean);
 $idtoedit = $_GET['id'];
 $editbox = nl2br($_POST['edit']);
 

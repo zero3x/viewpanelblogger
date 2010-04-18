@@ -1,7 +1,9 @@
 <?php
 include("../config.php");
 
-$tablenameclean = $_GET['tablename'];
+$tablename = $_GET['tablename'];
+$tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
+$tablenameclean = strtolower($tablenameclean);
 $idtodel = $_POST['postid'];
 
 $sql = "DELETE FROM $tablenameclean WHERE id = '$idtodel'";

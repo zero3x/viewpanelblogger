@@ -17,5 +17,5 @@ readfile("http://streeteye.info/viewpanel/versiontracker/viewpanelversiontracker
 		    <p>Thomas J&oslash;ssund </p>
 		    <p>&nbsp;</p>
 		    <p>&nbsp;</p>
-		    <p>Copyright Al Wilde 2009. All rights reserved.</p>
+		    <p>Copyright Al Wilde 2009-2010. All rights reserved.</p>
 		    <p>&nbsp;</p>

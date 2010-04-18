@@ -18,7 +18,7 @@ if (!$installcomp) {
 	<?php
 }
 
-include_once("lib/config.php"); 
+include("lib/config.php"); 
 if (function_exists("filechecker_enabled")) {
 	filechecker_enabled();
 }

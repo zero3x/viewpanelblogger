@@ -5,7 +5,7 @@
 <title>View Panel CP</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link href="themes/viewpanel/style.css" rel="stylesheet" type="text/css" />
+<link href="lib/core_theme/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -25,7 +25,7 @@
 	
     <div id="header">
             <div id="logo">
-                <h1><a href="#">View Panel</a></h1>
+                <h1><a href="?page=home">View Panel</a></h1>
 				<h2>A Blog Maker</h2>
             </div>
             <div id="middle">
@@ -35,7 +35,11 @@
 	
      <div id="navigation" class="menu">
          <ul>
-         <li><a href="?page=home">Home</a></li>
+         <li><a href="?page=home">Home</a>
+         <ul> <!-- Dropdown Start -->
+         <li><a href="<?php echo $siteurl; ?>">View Site</a></li>
+         </ul>
+         </li>
          <li><a href="?page=blogmanager">Manage Blogs</a>
          <ul> <!-- Dropdown Start -->
          <li><a href="?page=addposts">Add Posts</a></li>

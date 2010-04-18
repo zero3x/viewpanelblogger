@@ -237,3 +237,14 @@ form.searchform {
 .clear {
 	clear:both;
 }
+
+/* View Panel Classes */
+
+.blogposts { 
+	font-family:Georgia, "Times New Roman", Times, serif;
+}
+
+.authorandtime {
+	font-size:12px;
+	color:#999;
+}

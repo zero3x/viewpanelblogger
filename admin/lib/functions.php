@@ -70,10 +70,11 @@ mysql_close($con);
 }
 
 function View_Panel_Theme_Lister() {
-	$dir = "themes/blogs";
+	$dir = "themes";
 	$themes = scandir($dir);
 	foreach($themes as $theme) {
-		if ($theme != "." or $theme != "..") {
+		if ($theme == "." or $theme == ".." or $theme == "index.php") {
+		} else {
 		echo "<option name='$theme'>$theme</option>";
 		}
 	}
@@ -95,53 +96,44 @@ function dirSize($directory) {                                                  
 } 
 
 //Blog Functions
-
-function get_posts($border = "0", $order = "DESC", $tableid = "blogposts") {
-	include_once("lib/config.php");
-	$query = 'SELECT post FROM '.$tablenameclean.' ORDER BY id $order'; 
-	$output = mysql_query($query) or die(mysql_error());
-	
-	echo '<table border=$border id=\'$tableid\'>'; 
+function out_posts($border = '0', $author = 'Posted by', $date = 'on', $layout_1 = 'post', $layout_2 = 'author', $postclass = 'blogposts', $author_timeclass = 'authorandtime') {
+	include("lib/config.php");
+	mysql_connect($GLOBALS['localdatabase'], $GLOBALS['dbuser'], $GLOBALS['decryptpass']);
+	mysql_select_db($GLOBALS['$dbname']);
+	$query = "SELECT post,author,date FROM ". $GLOBALS['tablenameclean'] ." ORDER BY id DESC"; 
+    $output = mysql_query($query) or die(mysql_error());
 	while($row = mysql_fetch_array($output)){
-	echo '<tr>';
-	echo '<td>'.$row[post].'</td>';
-	echo '</tr>';
+	if ($layout_1 = "post") {
+		echo "<table border='".$border."' class='".$postclass."'>"; 
+		echo "<tr>";
+		echo "<td>".$row[post]."</td>";
+		echo "</tr>";
+		echo "</table>";
+	} else {
+		$authortime_combine = "".$author." ".$row['author']." ".$date." ".$row['date'];
+		echo "<table border='".$border."' class='".$author_timeclass."'>";
+		echo "<tr>";
+		echo "<td>".$authortime_combine."</td>";
+		echo "</tr>";
+		echo "</table>";
+	} if ($layout_2 = "author") {
+		$authortime_combine = "".$author." ".$row['author']." ".$date." ".$row['date'];
+		echo "<table border='".$border."' class='".$author_timeclass."'>";
+		echo "<tr>";
+		echo "<td>".$authortime_combine."</td>";
+		echo "</tr>";
+		echo "</table>";
+	} else {
+		echo "<table border='".$border."' class='".$postclass."'>"; 
+		echo "<tr>";
+		echo "<td>".$row[post]."</td>";
+		echo "</tr>";
+		echo "</table>";
 	}
-	echo '</table>'; 
+	}
 }
 
-function out_posts($border = "0", $authortime = "Posted by '. $row[author] .' on '. $row[date].'", $layout_1 = "post", $layout_2 = "author", $postid = "blogposts", $author_timeid = "authortime") {
-	include_once("lib/config.php");
-	$query = 'SELECT post,author,date FROM '.$tablenameclean.' ORDER BY id DESC'; 
-    $output = mysql_query($query) or die(mysql_error());
-	
-	if ($layout_1 = "post") {
-		echo '<table border=$border id=\'$postid\'>'; 
-		while($row = mysql_fetch_array($output)){
-		echo '<tr>';
-		echo '<td>'.$row[post].'</td>';
-		echo '</tr>';
-		echo '</table>'
-	} else {
-		echo '<table border=$border id=\'$author_timeid\'>'
-		echo '<tr>';
-		echo '$authortime';
-		echo '</tr>';
-	} if ($layout_1 = "author") {
-		echo '</table>'; 
-		echo '<table border=$border id=\'$author_timeid\'>'
-		echo '<tr>';
-		echo '$authortime';
-		echo '</tr>';
-	} else {
-		echo '<table border=$border id=\'$postid\'>'; 
-		while($row = mysql_fetch_array($output)){
-		echo '<tr>';
-		echo '<td>'.$row[post].'</td>';
-		echo '</tr>';
-		echo '</table>'
-	}
-	}
-	echo '</table>'; 
+function foo() {
+	echo "bar";
 }
 ?>
