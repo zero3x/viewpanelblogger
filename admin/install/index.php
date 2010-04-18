@@ -6,7 +6,7 @@ if( isset($_GET['action']) ) {
 	     if (file_exists("../lib/installcomplete.txt")) {
     echo "You've already installed View Panel. Doing so again will erase all posts and settings.";
 } else {
-		 echo"<p>Installing View Panel is an easy 3 step process (and one of those is just clicking a button!). Please make sure you fill out all the fields and enter the correct information.</p>";
+		 echo"<p>Installing View Panel is an easy 4 step process (and one of those is just clicking a button!). Please make sure you fill out all the fields and enter the correct information.</p>";
 		echo"<h1><strong>Step 1 - Database Settings</strong></h1>";
 		echo"<form id='form1' name='form1' method='post' action='index.php?action=databasesetup'>";
 		echo"  <table width='722' border='3'>";
@@ -81,7 +81,19 @@ if( isset($_GET['action']) ) {
 		echo"      </label></td>";
 		echo"    </tr>";
 		echo"  </table>";
-		echo"  <h1>Step 3 - Create</h1>";
+		echo"  <h1><strong>Step 3 -The Table</strong> (Blog)</h1>";
+		echo"  <p>A table will need to be created store all the posts you make. You can create more later.</p>";
+		echo"  <table width='686' border='1'>";
+		echo"    <tr>";
+		echo"      <td width='358'><p>Enter A Blog Name</p></td>";
+		echo"      <td width='312'><input name='tablename' type='text' id='tablename' value='Happy Blog Time' size='50' /></td>";
+		echo"    </tr>";
+		echo"    <tr>";
+		echo"      <td><p>Enter A Blog Description</p></td>";
+		echo"      <td><input name='tabledesc' type='text' id='tabledesc' value='It's happy time.' size='50' /></td>";
+		echo"    </tr>";
+		echo"  </table>";
+		echo"  <h1>Step 4 - Create</h1>";
 		echo"  <p>Hit the submit button to set up everything. It may take anything up to a few minutes. If something goes wrong an error will be returned and you'll have to click the 'back' button in your browser to come back to this page.</p>";
 		echo"  <p>";
 		echo"    <label>";
@@ -145,6 +157,15 @@ if( isset($_GET['action']) ) {
 		mysql_query($sql,$con);
 		echo "<p>Page Listing table created</p>";
 		
+		mysql_select_db($dbname, $con);
+		$sql = "CREATE TABLE $tablenameclean
+		(
+		id mediumint(9) NOT NULL AUTO_INCREMENT, 
+		PRIMARY KEY(id),
+		post longtext,
+		author tinytext,
+		date longtext
+		)";
 		
 		mysql_query($sql,$con);
 		echo "<p>Your posts table has been created</p>";
@@ -162,7 +183,11 @@ if( isset($_GET['action']) ) {
 		
 		mysql_query($sql,$con);
 		echo "<p>Your plugins table has been created</p>";
-
+		
+		$insert = "INSERT INTO page_lister (pageName, pageDesc)
+		VALUES ('".$tablename."', '".$tabledesc."')";
+		mysql_query($insert,$con);
+		
 		mysql_close($con);
 		
 		chmod("../lib", 0755);
@@ -181,11 +206,52 @@ if( isset($_GET['action']) ) {
 		\$localdatabase ='".$localdatabase."';\n
 		\$siteurl ='".$websiteUrl."';\n
 		\$timeoffset ='".$timeoffset."';\n
-		\$fileview_enabled ='checked';\n
-		\$databaseview_enabled ='checked';\n
+		\$fileview_enabled ='disabled';\n
+		\$databaseview_enabled ='disabled';\n
 		?>";
 		fwrite($dbfilehandle, $dbvariableshandle); 
 		fclose($dbfilehandle);
+		
+		//Make the base blog files
+		mkdir("../../".$tablenameclean."", 0777);
+		
+		$blogtemplate = "
+		<?php
+		
+		//BLOG CREATION VERSION 1. WRITTEN FOR VERSION 2.3 ON THE 24TH OF MARCH 2010.
+		//TODO: Theme support.
+		//AUTHOUR: Al Wilde.
+		//This file is the basic template for all blogs. 
+		//NOTE: Please use a single speech mark not a double.
+		
+		include('../admin/lib/config.php'); //Gets the MySQL connection and loads functions.
+		
+		//Output posts and author as table
+		\$query = 'SELECT post,author,date FROM $tablenameclean'; 
+		\$output = mysql_query(\$query) or die(mysql_error());
+		\$borderwidth = '0';
+		
+		echo '<link rel='stylesheet' type='text/css' href='style.css'> '
+		echo '<table border=0 class='posts'>'; 
+		while(\$row = mysql_fetch_array(\$output)){
+		echo '<tr>';
+		echo '<td>'.\$row[post].'</td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td><h5>Posted by '. \$row[author] . ' on ' . \$row[date]. '</h5></td>';
+		echo '</tr>';
+		}
+		echo '<tr>';
+		echo '<td><h5>Powered by View Panel.</h5></td>';
+		echo '</tr>';
+		echo '</table>'; 
+		
+		//You MAY NOT remove the \'Powered by View Panel.\' line without permission from Al Wilde. You may add on your own copyright though (EXAMPLE: Powered by View Panel with the pluginname plugin.)
+		?> ";
+		
+		$blogfilewrite = fopen("../../".$tablenameclean."/index.php","w");
+		fwrite($blogfilewrite, $blogtemplate);
+		fclose($blogfilewrite);
 		
 		echo "<p><a href='index.php?action=register'>Click here</a> to continue...</p>";
 }
