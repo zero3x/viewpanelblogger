@@ -158,19 +158,6 @@ if( isset($_GET['action']) ) {
 		echo "<p>Page Listing table created</p>";
 		
 		mysql_select_db($dbname, $con);
-		$sql = "CREATE TABLE $tablenameclean
-		(
-		id mediumint(9) NOT NULL AUTO_INCREMENT, 
-		PRIMARY KEY(id),
-		post longtext,
-		author tinytext,
-		date longtext
-		)";
-		
-		mysql_query($sql,$con);
-		echo "<p>Your posts table has been created</p>";
-		
-		mysql_select_db($dbname, $con);
 		$sql = "CREATE TABLE plugin_lister
 		(
 		id mediumint(9) NOT NULL AUTO_INCREMENT, 
@@ -183,6 +170,28 @@ if( isset($_GET['action']) ) {
 		
 		mysql_query($sql,$con);
 		echo "<p>Your plugins table has been created</p>";
+		
+		mysql_select_db($dbname, $con);
+		$sql = "CREATE TABLE introductions
+		(
+		id mediumint(9) NOT NULL AUTO_INCREMENT, 
+		PRIMARY KEY(id),
+		blogname longtext,
+		introduction longtext
+		)";
+		mysql_query($sql,$con);
+		echo "<p>Your introductions table has been created</p>";
+		
+		mysql_select_db($dbname, $con);
+		$sql = "CREATE TABLE sidebars
+		(
+		id mediumint(9) NOT NULL AUTO_INCREMENT, 
+		PRIMARY KEY(id),
+		blogname longtext,
+		sidebar longtext
+		)";
+		mysql_query($sql,$con);
+		echo "<p>Your sidebars table has been created</p>";
 		
 		$insert = "INSERT INTO page_lister (pageName, pageDesc)
 		VALUES ('".$tablename."', '".$tabledesc."')";
@@ -278,7 +287,11 @@ if( isset($_GET['action']) ) {
 		email varchar(60),
 		firstName varchar(60),
 		lastName varchar(60),
-		rank varchar(60)
+		rank varchar(60),
+		age int,
+		avatar text,
+		location text,
+		gender text
 		)";
 		
 		mysql_query($sqlglitch,$con);

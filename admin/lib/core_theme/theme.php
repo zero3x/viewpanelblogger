@@ -16,7 +16,7 @@
   <div id="right"><!-- Begin Top Area Right -->
 		    <ul>
                 <li>Hi <?php echo $displayname; ?>:</li>
-			    <li><a href="#">Edit Profile</a></li>
+			    <li><a href="?username=<?php echo $displayname; ?>">Edit Profile</a></li>
 				<li><a href="?page=logout">Logout</a></li>
 			</ul>
       </div><!-- End Top Area Right -->

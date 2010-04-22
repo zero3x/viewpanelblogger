@@ -40,18 +40,15 @@ function yellowit() {
 </script>
 
 
-		    <h1>Add A Post</h1>
-		    <p>This page allows you to easily add a post to your blog.		    </p>
+		    <h1>Add A Post		    </h1>
 		    <form name="form1" method="post" action="lib/scripts/post.php">
 		      <label>
 		        <blockquote>
-	              <p>1. 
-	              Choose a blog:
+	              <p>This post will be in the 
 	                <select name="page" id="page">
-	                  <?php View_Panel_Page_Lister(); ?>
-	                  </select>
-	              </p>
-	              <p>2. Enter your post.	              </p>
+        <?php View_Panel_Page_Lister(); ?>
+                    </select>
+	              blog.</p>
 	              <table width="532" border="0">
 	                <tr>
 	                  <td width="60">Insert tag:</td>
@@ -76,14 +73,18 @@ function yellowit() {
                     </tr>
                   </table>
 	              <p>
-	                <textarea name="edit" id="edit" cols="110" rows="15"></textarea>
-                  </p>
-	              <p>3. 
-	                Author / Posted By - 
-	                <input name="author" type="text" id="author" size="80">
+	                <label>
+	                  <input name="posttitle" type="text" id="posttitle" value="Title" size="110" />
+                    </label>
 	              </p>
-	              <p>4.
-                    <input type="submit" name="save" id="save" value="Save it!">
+	              <p>
+	                <textarea name="edit" id="edit" cols="110" rows="15">Content</textarea>
+                  </p>
+	              <p>
+	                <input name="author" type="text" id="author" value="Author" size="80">
+	              </p>
+	              <p>
+	                <input type="submit" name="save" id="save" value="Post">
                   </p>
 	            </blockquote>
 		      </label>

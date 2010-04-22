@@ -33,6 +33,7 @@ $sql = "CREATE TABLE $tablenameclean
 (
 id mediumint(9) NOT NULL AUTO_INCREMENT, 
 PRIMARY KEY(id),
+posttitle longtext,
 post longtext,
 author tinytext,
 date longtext
@@ -45,20 +46,13 @@ $insert = "INSERT INTO page_lister (pageName, pageDesc)
 VALUES ('".$tablename."', '".$tabledesc."')";
 mysql_query($insert,$con);
 
+$insert = "INSERT INTO introductions (introduction) VALUES ('Thanks for choosing View Panel as your blogging script! You can now make posts into this blog as well as edit this introduction.') WHERE blogname='$tablenameclean'";
+mysql_query($insert,$con);
+
 View_Panel_MySQL_Kill();
 
 //Make the base blog files
 mkdir("../../../".$tablenameclean."", 0777);
-
-//$blogtemplate = file_get_contents("../../themes/".$theme."/.php");
-//$blogfilewrite = fopen("../../".$tablenameclean."/post_content.php","w");
-//fwrite($blogfilewrite, $blogtemplate);
-//fclose($blogfilewrite);
-
-//Copy selected theme. - Not used as of 2.4
-//$source = "../../themes/blogs/".$theme."";
-//$dest = "../../../".$tablenameclean."";
-//copydir($source, $dest);
 
 //Write theme include
 $infofile = "<?php

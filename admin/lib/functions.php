@@ -96,13 +96,18 @@ function dirSize($directory) {                                                  
 } 
 
 //Blog Functions
-function out_posts($border = '0', $author = 'Posted by', $date = 'on', $layout_1 = 'post', $layout_2 = 'author', $postclass = 'blogposts', $author_timeclass = 'authorandtime') {
+function out_posts($border = '0', $author = 'Posted by', $date = 'on', $layout_1 = 'post', $layout_2 = 'author', $titleclass = 'posttitle', $postclass = 'blogposts', $author_timeclass = 'authorandtime') {
 	include("lib/config.php");
 	mysql_connect($GLOBALS['localdatabase'], $GLOBALS['dbuser'], $GLOBALS['decryptpass']);
 	mysql_select_db($GLOBALS['$dbname']);
-	$query = "SELECT post,author,date FROM ". $GLOBALS['tablenameclean'] ." ORDER BY id DESC"; 
+	$query = "SELECT posttitle,post,author,date FROM ". $GLOBALS['tablenameclean'] ." ORDER BY id DESC"; 
     $output = mysql_query($query) or die(mysql_error());
 	while($row = mysql_fetch_array($output)){
+	echo "<table border='".$border."' class='".$titleclass."'>"; 
+	echo "<tr>";
+	echo "<td>".$row[posttitle]."</td>";
+	echo "</tr>";
+	echo "</table>";
 	if ($layout_1 = "post") {
 		echo "<table border='".$border."' class='".$postclass."'>"; 
 		echo "<tr>";
@@ -133,7 +138,14 @@ function out_posts($border = '0', $author = 'Posted by', $date = 'on', $layout_1
 	}
 }
 
-function foo() {
-	echo "bar";
+function out_intro($border = '0', $introclass = 'introduction') {
+	include("lib/config.php");
+	mysql_connect($GLOBALS['localdatabase'], $GLOBALS['dbuser'], $GLOBALS['decryptpass']);
+	mysql_select_db($GLOBALS['$dbname']);
+	$query = "SELECT introduction FROM introductions WHERE blogname='". $GLOBALS['tablenameclean'] ."'"; 
+    $output = mysql_query($query) or die(mysql_error());
+	while($row = mysql_fetch_array($output)){
+		
+	}
 }
 ?>
