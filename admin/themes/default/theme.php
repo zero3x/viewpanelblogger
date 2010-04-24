@@ -26,8 +26,7 @@
 			<div class="page">
 				<div class="content">
 				
-					<!--<h3>Introduction</h3>
-					<p>Introductions are coming soon.</p>-->
+					<p><?php out_intro(); ?></p>
 					
 					<p><?php out_posts(); ?></p>
 				</div>

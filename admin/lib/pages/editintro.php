@@ -31,7 +31,7 @@
                     </tr>
                   </table>
 	              <p>
-	                <textarea name="introduction" id="introduction" cols="110" rows="15"><?php echo $row[post]; ?> </textarea>
+	                <textarea name="introduction" id="introduction" cols="110" rows="15"></textarea>
 	              </p>
 	              <p>
 	                <input type="submit" name="save" id="save" value="Post">

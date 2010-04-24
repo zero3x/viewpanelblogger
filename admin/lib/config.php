@@ -17,7 +17,7 @@ include('databasesettings.php');
 $displayname = $_COOKIE['View_Panel_ID'];
 $page = $_GET['page'];
 
-$panelversion = '2.4 Alpha';
+$panelversion = '2.4 \'Pinefield\'';
 
 //Start Functions
 

@@ -2,7 +2,7 @@
 $idtoedit = $_POST['postid'];
 $tablenameclean = $_GET['tablename'];
 
-$sql = "SELECT post,author FROM $tablenameclean WHERE id = '$idtoedit'";
+$sql = "SELECT posttitle,post,author FROM $tablenameclean WHERE id = '$idtoedit'";
 $output = mysql_query($sql) or die(mysql_error());
 $row = mysql_fetch_array($output)
 
@@ -74,6 +74,9 @@ function yellowit() {
                       </label></td>
                     </tr>
                   </table>
+      <p>
+        <input name="posttitle" type="text" id="posttitle" value="<?php echo $row[posttitle]; ?>" size="110" />
+      </p>
       <p>
         <label>
           <textarea name="edit" id="edit" cols="110" rows="15"><?php echo $row[post]; ?> </textarea>

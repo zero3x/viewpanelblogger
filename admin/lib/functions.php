@@ -145,7 +145,7 @@ function out_intro($border = '0', $introclass = 'introduction') {
 	$query = "SELECT introduction FROM introductions WHERE blogname='". $GLOBALS['tablenameclean'] ."'"; 
     $output = mysql_query($query) or die(mysql_error());
 	while($row = mysql_fetch_array($output)){
-		
+		echo $row[introduction];
 	}
 }
 ?>

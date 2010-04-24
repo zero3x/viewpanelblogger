@@ -11,8 +11,9 @@
 *******************************************************************************/
 include("../config.php");
 
+$tablename = $_POST['page'];
 $tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
-$sql="INSERT INTO introductions (introduction) VALUES('".$_POST[introduction]."') WHERE blogname='$tablenameclean'";
+$sql="UPDATE introductions SET introduction='".$_POST[introduction]."' WHERE blogname='$tablenameclean'";
 
 if (!mysql_query($sql,$con))
   {

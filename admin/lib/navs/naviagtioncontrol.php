@@ -45,8 +45,8 @@ if ($page == "home") {
            include('lib/pages/accessdenied.php');
       } elseif ($page == "logout") {
 		  include('lib/scripts/logout.php');
-	  } elseif ($page == isset($_GET['username'])) {
-		  include('lib/pages/profile.php')
+	  } elseif ($_GET['username'] == $_COOKIE['View_Panel_ID']) {
+		  include('lib/pages/profile.php');
 	  } else {
 		  include('lib/pages/error404.php');
 	  }
