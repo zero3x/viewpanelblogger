@@ -1,11 +1,11 @@
 <?php
-$idtoedit = $_POST['postid'];
+/*$idtoedit = $_POST['postid'];
 $tablenameclean = $_GET['tablename'];
 
 $sql = "SELECT posttitle,post,author FROM $tablenameclean WHERE id = '$idtoedit'";
 $output = mysql_query($sql) or die(mysql_error());
 $row = mysql_fetch_array($output)
-
+*/
 ?>
 <script type="text/javascript">
 <!--
@@ -49,8 +49,49 @@ function yellowit() {
 </script>
     <h1>Edit Posts</h1>
     <p>Made a typo in a post? Want to fix it? Look no further than this page...</p>
+    <form id="form2" name="form2" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+      Select Blog: 
+      <select name="page" id="page">
+        <?php View_Panel_Page_Lister(); ?>
+      </select>
+      <input type="submit" name="submit_blog" id="submit_blog" value="Continue" />
+    </form>
+    
+	
+	
+	<?php if (!isset($_POST['submit_blog'])) {
+		  $blog = $_POST['page'];
+		  $sql = "SELECT posttitle FROM $blog";
+		  $result = mysql_query($sql);
+		  
+		  while ($row = mysql_fetch_array($result)) {
+			  $title = $row["posttitle"];
+			  $option .= "<option value='$title'>";
+		  } 
+		  
+		  echo"<form id='form3' name='form3' method='post' action='".$_SERVER['PHP_SELF']."?blog=".$blog."'>
+		  <p>Select Post: 
+		  <select name='page2' id='page2'>
+		   <?php $option ?> 
+		  </select> <input type='submit' name='submit_post' id='submit_post' value='Continue' /></p></form>";
+	  } else {
+		  echo"<form id='form3' name='form3' method='post' action=''>
+		  <p>Select Post: 
+		  <select name='page2' id='page2'>
+		  </select></p></form>";
+    ?>
+      
+    <?php if (!isset($_POST['submit_post'])) {
+		$blog = $_GET['blog'];
+		$title = $_POST['page2'];
+		$sql = "SELECT id,post, posttitle, author FROM $blog WHERE posttitle='$title'";
+		$result = mysql_query($sql);
+		while ($row = mysql_fetch_array($result)) {
+			$post = $row['post'];
+			$author = $row['author'];
+			$title = $row['posttitle'];
+		}
     <form id="form1" name="form1" method="post" action=<?php echo "lib/scripts/editpost.php?id=".$idtoedit."&tablename=".$tablenameclean.""; ?> >
-      <p>1. Apply your edit:</p>
       <table width="532" border="0">
 	                <tr>
 	                  <td width="60">Insert tag:</td>
@@ -75,20 +116,20 @@ function yellowit() {
                     </tr>
                   </table>
       <p>
-        <input name="posttitle" type="text" id="posttitle" value="<?php echo $row[posttitle]; ?>" size="110" />
+        <input name="posttitle" type="text" id="posttitle" value="<?php echo $title; ?>" size="110" />
       </p>
       <p>
         <label>
-          <textarea name="edit" id="edit" cols="110" rows="15"><?php echo $row[post]; ?> </textarea>
+          <textarea name="edit" id="edit" cols="110" rows="15"><?php echo $post; ?> </textarea>
         </label>
       </p>
       <p>Author / Posted By: 
-        <label><input name="author" type="text" id="author" value="<?php echo $row[author]; ?>" size="80" />
+        <label><input name="author" type="text" id="author" value="<?php echo $author; ?>" size="80" />
         </label>
       </p>
       <p>2. 
         <label>
-          <input type="submit" name="submit" id="submit" value="Edit" />
+          <input type="submit" name="submit_edit" id="submit_edit" value="Edit" />
         </label>
       </p>
   </form>

@@ -33,12 +33,12 @@
 <input type="text" name="lastname" id="lastname" />
                     </label>
                   </p>
-                  <p>
+            <!--      <p>
                     <label>
                       Choose a rank for the user:
                       <input type="text" name="rank" id="rank" />
-                    </label>
-                  <a href="help/ranks.html" target="_blank">? </a></p>
+                    </label> 
+                  <a href="help/ranks.html" target="_blank">? </a></p>  -->
                   <p>Click the
 <label>
 <input type="submit" name="submit" id="submit" value="Submit" />

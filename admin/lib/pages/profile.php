@@ -1,6 +1,4 @@
 <?php 
-
-
 $usercheck = mysql_query("SELECT username FROM users WHERE username='".$_GET[username]."'");
 if(mysql_num_rows($usercheck) == 1){    //check if user exists
 if(isset($_COOKIE['View_Panel_ID'])) {
