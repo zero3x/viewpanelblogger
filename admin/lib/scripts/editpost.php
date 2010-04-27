@@ -7,7 +7,7 @@ $tablenameclean = strtolower($tablenameclean);
 $idtoedit = $_GET['id'];
 $editbox = nl2br($_POST['edit']);
 
-$sql="UPDATE $tablenameclean SET posttitle='".$_POST[posttitle]."' post='".$editbox."', author='".$_POST[author]."' WHERE id = '$idtoedit'";
+$sql="UPDATE $tablenameclean SET posttitle='".$_POST[posttitle]."', post='".$editbox."', author='".$_POST[author]."' WHERE id = '$idtoedit'";
 
 $handle = mysql_query($sql, $con );
 if(!$handle)

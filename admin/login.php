@@ -23,6 +23,8 @@ if (function_exists("filechecker_enabled")) {
 	filechecker_enabled();
 }
 
+
+
 if(isset($_COOKIE['View_Panel_ID'])) {
 	$username = $_COOKIE['View_Panel_ID']; 
     $pass = $_COOKIE['View_Panel_Key'];
@@ -39,26 +41,30 @@ if (isset($_POST['submit'])) {
 	if(!$_POST['username'] | !$_POST['pass']) {
        die('You did not fill in a required field.');
     }
-    $check = mysql_query("SELECT * FROM users WHERE username = '".$_POST['username']."'")or die(mysql_error());
+	//Prevent injection 
+$username = mysql_real_escape_string($_POST['username']);
+$password = mysql_real_escape_string($_POST['pass']);
+
+    $check = mysql_query("SELECT * FROM users WHERE username = '".$username."'")or die(mysql_error());
 	$check2 = mysql_num_rows($check);
     if ($check2 == 0) {
       die('User does not exist.');
         }
     while($info = mysql_fetch_array( $check )) 
     {
-    $_POST['pass'] = stripslashes($_POST['pass']);
+    $password = stripslashes($password);
     $info['password'] = stripslashes($info['password']);
-    $_POST['pass'] = md5($_POST['pass']);
-    if ($_POST['pass'] != $info['password']) {
+    $password = md5($password);
+    if ($password != $info['password']) {
        die('Incorrect password.');
     }
 	
 else 
 {
-$_POST['username'] = stripslashes($_POST['username']); 
+$username = stripslashes($username); 
 $hour = time() + 3600; 
-setcookie("View_Panel_ID", $_POST['username'], $hour, "/"); 
-setcookie("View_Panel_Key", $_POST['pass'], $hour, "/"); 
+setcookie("View_Panel_ID", $username, $hour, "/"); 
+setcookie("View_Panel_Key", $password, $hour, "/"); 
 
 header("Location: panel.php?page=home"); 
 } 

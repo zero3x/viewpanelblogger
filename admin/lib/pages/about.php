@@ -3,12 +3,16 @@
             <?php
 		    echo "Using Panel Version: " . $panelversion . "<br />";
            
-		    echo "Current Panel Version (Fetched From Tracker): ";
-readfile("http://streeteye.info/viewpanel/versiontracker/viewpanelversiontracker.php");
-			echo "<br />";
+		    echo "Current Panel Version is ";
+			$current = readfile("http://streeteye.info/viewpanel/versiontracker/viewpanelversiontracker.php");
+			echo ".<br /><br />";
+			if ($current == $panelversion) {
+				echo "Your version is up to date. <br />";
+			} else {
+				echo "Your version <FONT 
+style='BACKGROUND-COLOR: red; COLOR: white;'>is not</FONT> up to date. Please visit <a href='http://code.google.com/p/viewpanelblogger/downloads/list'>http://code.google.com/p/viewpanelblogger/downloads/list</a> to find an update. <br />";
+			}
             ?>
-		    </p>
-		    <p>If your version does not match the tracker version it means your View Panel is out of date. Please update it!</p>
 		    <h2>Credits</h2>
 		    <h3>Programming</h3>
 		    <p>Al Wilde</p>
@@ -19,3 +23,5 @@ readfile("http://streeteye.info/viewpanel/versiontracker/viewpanelversiontracker
 		    <p>&nbsp;</p>
 		    <p>Copyright Al Wilde 2009-2010. All rights reserved.</p>
 		    <p>&nbsp;</p>
+
+			

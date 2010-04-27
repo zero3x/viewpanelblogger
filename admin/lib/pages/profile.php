@@ -1,4 +1,14 @@
 <?php 
+
+if (isset($_POST['submit_editprofile'])) {
+	$sql="UPDATE users SET firstName='".$_POST[firstname]."', lastName='".$_POST[lastname]."', email='".$_POST[email]."', age='".$_POST[age]."', gender='".$_POST[gender]."', location='".$_POST[location]."', avatar='".$_POST[avatar]."' WHERE username = '".$_GET[username]."'";
+	$query = mysql_query($sql, $con );
+	if (!$query) {
+		echo "There was a problem editing your profile";
+	} else {
+		echo "Profile edited";
+	}
+}
 $usercheck = mysql_query("SELECT username FROM users WHERE username='".$_GET[username]."'");
 if(mysql_num_rows($usercheck) == 1){    //check if user exists
 if(isset($_COOKIE['View_Panel_ID'])) {
@@ -15,7 +25,7 @@ if (isset($_GET['username']) && (isset($_GET['action']) && ($_GET['action'] == '
 $query = "SELECT email,age,avatar,location,gender,firstname,lastname FROM users WHERE username = '".$_GET[username]."'"; 
 $output = mysql_query($query) or die(mysql_error());
 while($row = mysql_fetch_array($output)){	 
-echo "<form>";
+echo "<form id='form1' name='form1' method='post' action='".$_SERVER['PHP_SELF']."?username=".$_GET[username]."'>";
 echo "<p>Edit Profile - $_GET[username]</p>";
 echo "<p><label>First Name:";
 echo "<input name='firstname' type='text' id='firstname' value='$row[firstname]' size='50' maxlength='50'></label></p>";
@@ -27,15 +37,15 @@ echo "<p><label>Age:";
 echo "<input name='age' type='text' id='age' value='$row[age]' size='50' maxlength='50'></label></p>";
 echo "<p><label>Gender:";
 echo "		  <select name='gender' id='gender'>";
-echo "			<option value='male'>Male</option>";
-echo "			<option value='female'>Female</option>";
-echo "			<option value='na'>Not Specified</option>";
+echo "			<option value='Male'>Male</option>";
+echo "			<option value='Female'>Female</option>";
+echo "			<option value='Not Specified'>Not Specified</option>";
 echo "		  </select></label></p>";
 echo "<p><label>Location";
 echo "		<input name='location' type='text' id='location' value='$row[location]' size='50' maxlength='50'></label></p>";
 echo "<p><label>Avatar";
-echo "		<input name='avatar' type='text' id='avatar' value='$row[avatar]' size='50' maxlength='50'></label></p>";
-echo "<p><input type='submit' name='submit' id='submit' value='Submit'></p>";
+echo "		<input name='avatar' type='text' id='avatar' value='$row[avatar]' size='50'></label></p>";
+echo "<p><input type='submit' name='submit_editprofile' id='submit_editprofile' value='Submit'></p>";
 echo "	</form>	";	
 }
 } 
@@ -55,7 +65,7 @@ if(isset($_COOKIE['View_Panel_ID'])) {
        if ($pass != $info['password']) {
 		   die("You're not logged in");
        } else {  
-$query = "SELECT email,age,avatar,location,gender FROM users WHERE username = '".$_GET[username]."'"; 
+$query = "SELECT firstname, lastname, email,age,avatar,location,gender FROM users WHERE username = '".$_GET[username]."'"; 
 $output = mysql_query($query) or die(mysql_error());
 while($row = mysql_fetch_array($output)){
 echo "<table align='left' border='0'>
@@ -63,11 +73,11 @@ echo "<table align='left' border='0'>
     <td colspan='2'>Welcome $_GET[username]</td>
   </tr>
   <tr>
-    <td width='271' rowspan='2'><img>".$row['avatar']."</img></td>
-    <td width='310'>First Name: ".$row['firstname']."</td>
+    <td width='271' rowspan='2'><img src='".$row['avatar']."' /></td>
+    <td width='310'>First Name: ".$row[firstname]."</td>
   </tr>
   <tr>
-    <td>Last Name: ".$row['lastname']."</td>
+    <td>Last Name: ".$row[lastname]."</td>
   </tr>
   <tr>
     <td><a href='?username=$_GET[username]&action=editprofile'>Edit Profile</a></td>

@@ -1,4 +1,3 @@
 Give each post its own page.
-Add support for blog introductions.
 Add support for sidebars.
-Add user signup.
+Add public user signup.

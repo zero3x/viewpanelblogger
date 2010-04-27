@@ -3,8 +3,10 @@ Change Log
 Blog introductions added
 Added basis for user manager
 Removed the need to create a blog on install
+Improved edit posts screen.
+Security fixes.
 
-===Version 2.4 A===
+===Version 2.4 Alpha?===
 New blog theme functions - get_posts, get_posts_date and get_posts_author.
 Blogs no longer use the res directory.
 Blogs do not need to copy the theme they want to use any more.

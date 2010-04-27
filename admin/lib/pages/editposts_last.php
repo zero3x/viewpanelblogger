@@ -49,7 +49,7 @@ function yellowit() {
 </script>
     <h1>Edit Posts</h1>
     <p>Made a typo in a post? Want to fix it? Look no further than this page...</p>
-    <form id="form2" name="form2" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <form id="form2" name="form2" method="post" action="<?php echo $_SERVER['PHP_SELF']."?page=editposts"; ?>">
       Select Blog: 
       <select name="page" id="page">
         <?php View_Panel_Page_Lister(); ?>
@@ -59,29 +59,31 @@ function yellowit() {
     
 	
 	
-	<?php if (!isset($_POST['submit_blog'])) {
+	<?php if (isset($_POST['submit_blog'])) {
 		  $blog = $_POST['page'];
+		  $blog = preg_replace("/[^a-zA-Z0-9]/", "", $blog);
+          $blog = strtolower($blog);
 		  $sql = "SELECT posttitle FROM $blog";
 		  $result = mysql_query($sql);
 		  
 		  while ($row = mysql_fetch_array($result)) {
 			  $title = $row["posttitle"];
-			  $option .= "<option value='$title'>";
+			  $option .= "<option>$title</option>";
 		  } 
-		  
-		  echo"<form id='form3' name='form3' method='post' action='".$_SERVER['PHP_SELF']."?blog=".$blog."'>
+		  echo"<form id='form3' name='form3' method='post' action='".$_SERVER['PHP_SELF']."?page=editposts&blog=".$blog."'>
 		  <p>Select Post: 
 		  <select name='page2' id='page2'>
-		   <?php $option ?> 
+		   $option
 		  </select> <input type='submit' name='submit_post' id='submit_post' value='Continue' /></p></form>";
 	  } else {
 		  echo"<form id='form3' name='form3' method='post' action=''>
 		  <p>Select Post: 
 		  <select name='page2' id='page2'>
 		  </select></p></form>";
+	  }
     ?>
       
-    <?php if (!isset($_POST['submit_post'])) {
+    <?php if (isset($_POST['submit_post'])) {
 		$blog = $_GET['blog'];
 		$title = $_POST['page2'];
 		$sql = "SELECT id,post, posttitle, author FROM $blog WHERE posttitle='$title'";
@@ -89,9 +91,12 @@ function yellowit() {
 		while ($row = mysql_fetch_array($result)) {
 			$post = $row['post'];
 			$author = $row['author'];
-			$title = $row['posttitle'];
+			$lasttitle = $row['posttitle'];
+			$id = $row['id'];
 		}
-    <form id="form1" name="form1" method="post" action=<?php echo "lib/scripts/editpost.php?id=".$idtoedit."&tablename=".$tablenameclean.""; ?> >
+	}
+		?>
+    <form id="form1" name="form1" method="post" action='<?php echo "lib/scripts/editpost.php?id=".$id."&tablename=".$blog.""; ?> '
       <table width="532" border="0">
 	                <tr>
 	                  <td width="60">Insert tag:</td>
@@ -116,7 +121,7 @@ function yellowit() {
                     </tr>
                   </table>
       <p>
-        <input name="posttitle" type="text" id="posttitle" value="<?php echo $title; ?>" size="110" />
+        <input name="posttitle" type="text" id="posttitle" value="<?php echo $lasttitle; ?>" size="110" />
       </p>
       <p>
         <label>

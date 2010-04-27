@@ -10,7 +10,7 @@ if ($page == "home") {
 	  } elseif ($page == "addposts") {
            include('lib/pages/addposts.php');
 	  } elseif ($page == "editposts") {
-           include('lib/pages/editposts.php');
+           include('lib/pages/editposts_last.php');
 	  } elseif ($page == "deleteposts") {
            include('lib/pages/deleteposts.php');
 	   } elseif ($page == "editintro") {

@@ -180,11 +180,7 @@ if( isset($_GET['action']) ) {
 		)";
 		mysql_query($sql,$con);
 		echo "<p>Your sidebars table has been created</p>";
-		
-		$insert = "INSERT INTO page_lister (pageName, pageDesc)
-		VALUES ('".$tablename."', '".$tabledesc."')";
-		mysql_query($insert,$con);
-		
+
 		mysql_close($con);
 		
 		chmod("../lib", 0755);
