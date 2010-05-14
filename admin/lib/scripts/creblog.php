@@ -46,7 +46,7 @@ $insert = "INSERT INTO page_lister (pageName, pageDesc)
 VALUES ('".$tablename."', '".$tabledesc."')";
 mysql_query($insert,$con);
 
-$insert = "INSERT INTO introductions (blogname) VALUES ('".$tablename."')";
+$insert = "INSERT INTO introductions (blogname) VALUES ('".$tablenameclean."')";
 mysql_query($insert,$con);
 
 $insert = "INSERT INTO introductions (introduction) VALUES ('Thanks for choosing View Panel as your blogging script! You can now make posts into this blog as well as edit this introduction.') WHERE blogname='$tablenameclean'";
