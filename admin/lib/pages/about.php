@@ -1,10 +1,10 @@
 <h1>About View Panel</h1>
 		    <h2>Tech Info</h2>
             <?php
-		    echo "Using Panel Version: " . $panelversion . "<br />";
+		    echo "Using Panel Version: ".$panelversion.".<br />";
            
 		    echo "Current Panel Version is ";
-			$current = readfile("http://streeteye.info/viewpanel/versiontracker/viewpanelversiontracker.php");
+			$current = ("http://streeteye.info/viewpanel/versiontracker/viewpanelversiontracker.php");
 			echo ".<br /><br />";
 			if ($current == $panelversion) {
 				echo "Your version is up to date. <br />";

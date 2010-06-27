@@ -80,6 +80,8 @@ $infofilewrite = fopen("../../../".$tablenameclean."/lib/config.php","w");
 fwrite($infofilewrite, $infofile);
 fclose($infofilewrite);
 
-echo "Your blog URL is VIEWPANEL'S BASE DIRECTORY/".$tablenameclean."";
-echo "<p>Blog creation complete. Click <a href='../../login.php'>here</a> to return to the login page.</p>"
+$url_facebook_parse = "../../../$tablenameclean/index.php";
+echo "<p>Blog Created! Click <a href='../../../$tablenameclean/'>here</a> to view it.</p>";
+echo "<p>And why not start sharing your blog with your facebook friends? <a name='fb_share' type='button' share_url='".$url_facebook_parse."' href='http://www.facebook.com/sharer.php'>Share</a><script src='http://static.ak.fbcdn.net/connect.php/js/FB.Share' type='text/javascript'></script></p>";
+echo "Or you could just go back to the <a href='../../login.php'>login</a> page.";
 ?>

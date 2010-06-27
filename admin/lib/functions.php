@@ -153,4 +153,48 @@ function out_intro($border = '0', $introclass = 'introduction') {
 		
 	}
 }
+
+function out_expanded($border = '0', $author = 'Posted by', $date = 'on', $layout_1 = 'post', $layout_2 = 'author', $titleclass = 'posttitle', $postclass = 'blogposts', $author_timeclass = 'authorandtime') {
+	if (isset($_GET[postid])) {
+		include("lib/config.php");
+		mysql_connect($GLOBALS['localdatabase'], $GLOBALS['dbuser'], $GLOBALS['decryptpass']);
+		mysql_select_db($GLOBALS['$dbname']);
+		$query = "SELECT posttitle,post,author,date FROM ". $GLOBALS['tablenameclean'] ." ORDER BY id DESC"; 
+		$output = mysql_query($query) or die(mysql_error());
+		while($row = mysql_fetch_array($output)){
+		echo "<table border='".$border."' class='".$titleclass."'>"; 
+		echo "<tr>";
+		echo "<td>".$row[posttitle]."</td>";
+		echo "</tr>";
+		echo "</table>";
+		if ($layout_1 = "post") {
+			echo "<table border='".$border."' class='".$postclass."'>"; 
+			echo "<tr>";
+			echo "<td>".$row[post]."</td>";
+			echo "</tr>";
+			echo "</table>";
+		} else {
+			$authortime_combine = "".$author." ".$row['author']." ".$date." ".$row['date'];
+			echo "<table border='".$border."' class='".$author_timeclass."'>";
+			echo "<tr>";
+			echo "<td>".$authortime_combine."</td>";
+			echo "</tr>";
+			echo "</table>";
+		} if ($layout_2 = "author") {
+			$authortime_combine = "".$author." ".$row['author']." ".$date." ".$row['date'];
+			echo "<table border='".$border."' class='".$author_timeclass."'>";
+			echo "<tr>";
+			echo "<td>".$authortime_combine."</td>";
+			echo "</tr>";
+			echo "</table>";
+		} else {
+			echo "<table border='".$border."' class='".$postclass."'>"; 
+			echo "<tr>";
+			echo "<td>".$row[post]."</td>";
+			echo "</tr>";
+			echo "</table>";
+		}
+		}
+	}
+}
 ?>
