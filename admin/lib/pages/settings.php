@@ -1,4 +1,21 @@
+<?php
+//Optimize tables
+if ($_GET['action'] == "optimize") {
+$alltables = mysql_query("SHOW TABLES");
+while ($table = mysql_fetch_assoc($alltables))
+{
+   foreach ($table as $db => $tablename)
+   {
+       mysql_query("ANALYZE TABLE `".$tablename."`")
+       or die(mysql_error());
+       mysql_query("OPTIMIZE TABLE `".$tablename."`")
+       or die(mysql_error());
+   }
+}
 
+exit("Tables optimized");
+}
+?>
     <form id="form1" name="form1" method="post" action="lib/scripts/savesettings.php">
     <h1>Settings</h1>
       <p>Here you can edit some settings used in the operation of View Panel. To see the other variables you'll have to open config.php manually.      </p>
@@ -11,6 +28,10 @@
           <td width="450"><label>
             <input name="websiteurl" type="text" id="websiteurl" value=<?php echo $siteurl; ?> size="70" />
           </label></td>
+        </tr>
+        <tr>
+          <td height="21"><p><strong>Maximum File Size</strong></p></td>
+          <td><input name="websiteurl2" type="text" id="websiteurl2" value="<?php echo $filesize_limit; ?>" size="70" /></td>
         </tr>
         <tr>
           <td height="21" colspan="2" align="center"><h2><strong>MySQL</strong> Settings</h2></td>
@@ -32,10 +53,14 @@
           </label></td>
         </tr>
         <tr>
-          <td height="21"><p><strong><a href="help/popups.php#mysqldataname" onclick="window.open('help/popups.php#mysqldataname','popup','width=500,height=500,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"><img src="themes/viewpanel/images/helptopics.gif" alt="help" border=0></a> MySQL Database Name</strong>.</p></td>
+          <td height="21"><p><strong><a href="help/popups.php#mysqldataname" onclick="window.open('help/popups.php#mysqldataname','popup','width=500,height=500,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"><img src="themes/viewpanel/images/helptopics.gif" alt="help" border=0></a> MySQL Database Name</strong></p></td>
           <td><label>
             <input name="databasename" type="text" id="databasename" value= <?php echo $dbname; ?> size="70" />
           </label></td>
+        </tr>
+        <tr>
+          <td height="21"><strong><a href="help/popups.php#optimize" onclick="window.open('help/popups.php#mysqldataname','popup','width=500,height=500,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"><img src="themes/viewpanel/images/helptopics.gif" alt="help" border="0" /></a>Optimize Tables</strong></td>
+          <td height="21"><?php echo"<a href='".$_SERVER['PHP_SELF']."?page=settings&action=optimize'>Do it now</a>"; ?></td>
         </tr>
         <tr>
           <td height="21" colspan="2" align="center"><h2>Panel Settings</h2></td>

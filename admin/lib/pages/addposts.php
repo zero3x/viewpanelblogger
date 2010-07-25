@@ -39,17 +39,20 @@ function yellowit() {
 //-->
 </script>
 
-
-		    <h1>Add A Post		    </h1>
+            
+<h1>Add A Post		    </h1>
+            
 		    <form name="form1" method="post" action="lib/scripts/post.php">
-		      <label>
-		        <blockquote>
-	              <p>This post will be in the 
+            <h3>Choose A Blog </h3>
+            <fieldset>
+	          <p>This post will be in the 
 	                <select name="page" id="page">
         <?php View_Panel_Page_Lister(); ?>
-                    </select>
-	              blog.</p>
-	              <table width="532" border="0">
+                </select>
+              blog</p></fieldset>
+                  <fieldset>
+                  <h3>Make Your Post </h3>
+                  <table width="532" border="0">
 	                <tr>
 	                  <td width="60">Insert tag:</td>
 	                  <td width="90"><select name="jumpMenu" id="jumpMenu">
@@ -83,7 +86,16 @@ function yellowit() {
 	              <p>
 	                <input name="author" type="text" id="author" value="Author" size="80">
 	              </p>
-	              <p>
+          </fieldset>
+	              <h3>Attach A File </h3>
+	              <fieldset>
+	                
+                      <legend>
+                      <label>
+                        <select name="file_viewer" size="4" id="file_viewer">
+                        </select>
+                  </label></legend></fieldset>
+	              
 	                <input type="submit" name="save" id="save" value="Post">
                   </p>
 	            </blockquote>

@@ -1,4 +1,7 @@
 <?php 
+/* This script installs View Panel */
+/* It was created by Al Wilde when View Panel was first founded and has been added to ever since. */
+/* The last code check and minor revision was on the 29th of June 2010 */
 include("../lib/functions.php");
 if( isset($_GET['action']) ) {
    switch( $_GET['action'] ) {
@@ -160,6 +163,21 @@ if( isset($_GET['action']) ) {
 		echo "<p>Your plugins table has been created</p>";
 		
 		mysql_select_db($dbname, $con);
+		$sql = "CREATE TABLE upload_files
+		(
+		id mediumint(9) NOT NULL AUTO_INCREMENT, 
+		PRIMARY KEY(id),
+		fileName longtext,
+		fileType longtext,
+		fileSize longtext,
+		fileUploader longtext
+		fileDate date,
+		)";
+		
+		mysql_query($sql,$con);
+		echo "<p>Your files table has been created</p>";
+		
+		mysql_select_db($dbname, $con);
 		$sql = "CREATE TABLE introductions
 		(
 		id mediumint(9) NOT NULL AUTO_INCREMENT, 
@@ -193,14 +211,15 @@ if( isset($_GET['action']) ) {
 		$encryptpass = base64_encode($dbpass);
 		$dbfilehandle = fopen("../lib/databasesettings.php","w");
 		$dbvariableshandle = "<?php\n
-		\$dbuser='".$dbuser."';\n
-		\$dbpass ='".$encryptpass."';\n
-		\$dbname ='".$dbname."';\n
-		\$localdatabase ='".$localdatabase."';\n
-		\$siteurl ='".$websiteUrl."';\n
-		\$timeoffset ='".$timeoffset."';\n
-		\$fileview_enabled ='disabled';\n
-		\$databaseview_enabled ='disabled';\n
+		\$dbuser='".$dbuser."'; //Database users username. \n
+		\$dbpass ='".$encryptpass."'; //Password of database user. \n
+		\$dbname ='".$dbname."'; //The name of the database. \n
+		\$localdatabase ='".$localdatabase."'; //The location of the database. \n
+		\$siteurl ='".$websiteUrl."'; //The user defined URL of the blog. \n
+		\$timeoffset ='".$timeoffset."'; //The timeoffset. \n
+		\$fileview_enabled ='disabled'; //Enables of disables the file viewer.\n
+		\$databaseview_enabled ='disabled'; //Enables or disables the user manager. \n
+		\$filesize_limit = ""; //The limit in ... of files uploaded by normal users. \n
 		?>";
 		fwrite($dbfilehandle, $dbvariableshandle); 
 		fclose($dbfilehandle);

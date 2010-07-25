@@ -4,9 +4,7 @@ if (isset($_POST['submit_editprofile'])) {
 	$sql="UPDATE users SET firstName='".$_POST[firstname]."', lastName='".$_POST[lastname]."', email='".$_POST[email]."', age='".$_POST[age]."', gender='".$_POST[gender]."', location='".$_POST[location]."', avatar='".$_POST[avatar]."' WHERE username = '".$_GET[username]."'";
 	$query = mysql_query($sql, $con );
 	if (!$query) {
-		echo "There was a problem editing your profile";
-	} else {
-		echo "Profile edited";
+		echo "There was a problem saving your profile.";
 	}
 }
 $usercheck = mysql_query("SELECT username FROM users WHERE username='".$_GET[username]."'");
@@ -22,6 +20,12 @@ if(isset($_COOKIE['View_Panel_ID'])) {
 		   
 		   
 if (isset($_GET['username']) && (isset($_GET['action']) && ($_GET['action'] == 'editprofile'))) {
+$usercheck = mysql_query("SELECT username FROM users WHERE username='".$_GET[username]."'");
+if(mysql_num_rows($usercheck) == 1){
+	if(isset($_COOKIE['View_Panel_ID'])) {
+		if ($_COOKIE['View_Panel_ID'] != $_GET[username]) {
+			die("You are not logged in");
+		} else {
 $query = "SELECT email,age,avatar,location,gender,firstname,lastname FROM users WHERE username = '".$_GET[username]."'"; 
 $output = mysql_query($query) or die(mysql_error());
 while($row = mysql_fetch_array($output)){	 
@@ -53,24 +57,17 @@ echo "	</form>	";
 }
 }
 }
+	}
 
 if (isset($_GET['username']) && (!isset($_GET['action']))) {
 $usercheck = mysql_query("SELECT username FROM users WHERE username='".$_GET[username]."'");
 if(mysql_num_rows($usercheck) == 1){    //check if user exists
-if(isset($_COOKIE['View_Panel_ID'])) {
-	$username = $_COOKIE['View_Panel_ID']; 
-    $pass = $_COOKIE['View_Panel_Key'];
-    $check = mysql_query("SELECT * FROM users WHERE username = '$username'")or die(mysql_error());
-    while($info = mysql_fetch_array( $check )) {
-       if ($pass != $info['password']) {
-		   die("You're not logged in");
-       } else {  
 $query = "SELECT firstname, lastname, email,age,avatar,location,gender FROM users WHERE username = '".$_GET[username]."'"; 
 $output = mysql_query($query) or die(mysql_error());
 while($row = mysql_fetch_array($output)){
 echo "<table align='left' border='0'>
   <tr>
-    <td colspan='2'>Welcome $_GET[username]</td>
+    <td colspan='2'><h2>Welcome $_GET[username]</h2></td>
   </tr>
   <tr>
     <td width='271' rowspan='2'><img src='".$row['avatar']."' /></td>
@@ -79,9 +76,13 @@ echo "<table align='left' border='0'>
   <tr>
     <td>Last Name: ".$row[lastname]."</td>
   </tr>
-  <tr>
-    <td><a href='?username=$_GET[username]&action=editprofile'>Edit Profile</a></td>
-    <td>Age: ".$row['age']."</td>
+  <tr>";
+  if ($_GET['username'] !=  $_COOKIE['View_Panel_ID']) {
+		  echo ""; 
+       } else if ($_GET['username'] ==  $_COOKIE['View_Panel_ID']) {
+    echo "<td><a href='?username=$_GET[username]&action=editprofile'>Edit Profile</a></td>";
+	   }
+   echo" <td>Age: ".$row['age']."</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -96,8 +97,6 @@ echo "<table align='left' border='0'>
     <td>Email: ".$row['email']."</td>
   </tr>
 </table>";
-
-}
 }
 }
 }

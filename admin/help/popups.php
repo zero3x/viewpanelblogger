@@ -8,6 +8,8 @@
 <p>This is the location of your database. If you're not sure ask your webhost. It's usually localhost.</p>
 <p><strong><a name="mysqldataname"></a>MySQL Database Name</strong></p>
 <p>The name of your database. You can usually leave this as it is.</p>
+<p><strong><a name="optimize" id="optimize"></a>Optimize Tables</strong></p>
+<p>'Defragments' your table so to speak.</p>
 <p><strong><a name="filemanagerenabled"></a>File Manager Enabled</strong></p>
 <p>Enable or disable the ability to use the file manager for all users.</p>
 <p><strong><a name="usermanagerenabled"></a>User Manager Enabled</strong></p>

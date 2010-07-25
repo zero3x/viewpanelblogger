@@ -10,13 +10,13 @@
 				echo "Your version is up to date. <br />";
 			} else {
 				echo "Your version <FONT 
-style='BACKGROUND-COLOR: red; COLOR: white;'>is not</FONT> up to date. Please visit <a href='http://code.google.com/p/viewpanelblogger/downloads/list'>http://code.google.com/p/viewpanelblogger/downloads/list</a> to find an update. <br />";
+style='BACKGROUND-COLOR: red; COLOR: white;'>is not</FONT> up to date. Please visit <a href='http://viewpanel.streeteye.info/downloads.php'>The View Panel Downloads Section</a> to find an update. <br />";
 			}
             ?>
 		    <h2>Credits</h2>
 		    <h3>Programming</h3>
 		    <p>Al Wilde</p>
-		    <h3>Debuggers</h3>
+		    <h3>Debuggers - Past And Present</h3>
 		    <p>Al Wilde</p>
 		    <p>Thomas J&oslash;ssund </p>
 		    <p>&nbsp;</p>
