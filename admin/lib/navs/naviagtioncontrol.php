@@ -41,7 +41,7 @@ if ($page == "home") {
            include('lib/pages/accessdenied.php');
 	  } elseif ($page == "usermanager" && $databaseview_enabled == 'enabled') {
 		   include('lib/pages/usermanager.php');
-	  } elseif ($page == "filemanager" && $databaseview_enabled == 'disabled') {
+	  } elseif ($page == "usermanager" && $databaseview_enabled == 'disabled') {
            include('lib/pages/accessdenied.php');
       } elseif ($page == "logout") {
 		  include('lib/scripts/logout.php');

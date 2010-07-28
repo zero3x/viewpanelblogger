@@ -9,7 +9,7 @@ if( isset($_GET['action']) ) {
 	     if (file_exists("../lib/installcomplete.txt")) {
     echo "You've already installed View Panel. Doing so again will erase all posts and settings.";
 } else {
-		 echo"<p>Installing View Panel is an easy 3 step process (and one of those is just clicking a button!). Please make sure you fill out all the fields and enter the correct information.</p>";
+		 echo"<p>Installing View Panel is an easy 3 step process (and one of those is just clicking a button!). Please make sure you fill out all the fields and enter the correct information. Once the button is pressed it should take View Panel about 20 seconds to install.</p>";
 		echo"<h1><strong>Step 1 - Database Settings</strong></h1>";
 		echo"<form id='form1' name='form1' method='post' action='index.php?action=databasesetup'>";
 		echo"  <table width='722' border='3'>";
@@ -22,7 +22,7 @@ if( isset($_GET['action']) ) {
 		echo"    </tr>";
 		echo"    <tr>";
 		echo"      <td><p>Database Name</p>";
-		echo"      <p>Enter the name of the database you've created which VP should use.</p></td>";
+		echo"      <p>Enter the name of the database you would like View Panel to create. This should not exist.</p></td>";
 		echo"      <td><input name='dbname' type='text' id='dbname' value='my_db' size='50' /></td>";
 		echo"    </tr>";
 		echo"    <tr>";
@@ -125,6 +125,8 @@ if( isset($_GET['action']) ) {
 		
 		$tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
 		
+		
+		
 		//Establish if they are using the local or external connection and connect.
 		echo "<p>Establishing connection.</p>";
 			$con = mysql_connect($localdatabase,$dbuser,$dbpass);
@@ -132,6 +134,8 @@ if( isset($_GET['action']) ) {
 				die('Could not connect: ' . mysql_error());
 				echo "View Panel could not connect to the database. Please go back and check your settings.";
 			}
+		
+		mysql_query("CREATE DATABASE $dbname",$con);
 		
 		//Create the tables
 		echo "<p>Creating tables.</p>";
@@ -148,6 +152,8 @@ if( isset($_GET['action']) ) {
 		mysql_query($sql,$con);
 		echo "<p>Page Listing table created</p>";
 		
+		sleep(2);
+		
 		mysql_select_db($dbname, $con);
 		$sql = "CREATE TABLE plugin_lister
 		(
@@ -162,6 +168,8 @@ if( isset($_GET['action']) ) {
 		mysql_query($sql,$con);
 		echo "<p>Your plugins table has been created</p>";
 		
+		sleep(2);
+		
 		mysql_select_db($dbname, $con);
 		$sql = "CREATE TABLE upload_files
 		(
@@ -170,12 +178,14 @@ if( isset($_GET['action']) ) {
 		fileName longtext,
 		fileType longtext,
 		fileSize longtext,
-		fileUploader longtext
-		fileDate date,
+		fileUploader longtext,
+		fileDate date
 		)";
 		
 		mysql_query($sql,$con);
 		echo "<p>Your files table has been created</p>";
+		
+		sleep(2);
 		
 		mysql_select_db($dbname, $con);
 		$sql = "CREATE TABLE introductions
@@ -187,6 +197,8 @@ if( isset($_GET['action']) ) {
 		)";
 		mysql_query($sql,$con);
 		echo "<p>Your introductions table has been created</p>";
+		
+		sleep(2);
 		
 		mysql_select_db($dbname, $con);
 		$sql = "CREATE TABLE sidebars
@@ -219,7 +231,7 @@ if( isset($_GET['action']) ) {
 		\$timeoffset ='".$timeoffset."'; //The timeoffset. \n
 		\$fileview_enabled ='disabled'; //Enables of disables the file viewer.\n
 		\$databaseview_enabled ='disabled'; //Enables or disables the user manager. \n
-		\$filesize_limit = ""; //The limit in ... of files uploaded by normal users. \n
+		\$filesize_limit = ''; //The limit in ... of files uploaded by normal users. \n
 		?>";
 		fwrite($dbfilehandle, $dbvariableshandle); 
 		fclose($dbfilehandle);
@@ -373,7 +385,6 @@ if( isset($_GET['action']) ) {
    }
 } else {
 	echo" <p>Thanks for choosing View Panel as your blogging script. Before you install View Panel please:</p>";
-	echo"<p>Create a MySQL Database which View Panel can use.</p>";
 	echo"<p>Create a MySQL user and give him full permissions for that database.</p>";
 	echo"<p>&nbsp;</p>";
 	echo"<p>Remember, View Panel requires:</p>";

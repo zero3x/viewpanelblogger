@@ -1,5 +1,11 @@
 Change Log
 
+===2.5 'Reality' RC1===
+Fixed the access denied page if the user manager is turned off under settings
+Fixed the installer giving out an area.
+Fixed the installer not creating the files table.
+Started work on ranking and permission system.
+
 ===2.5 'Reality'===
 Completed File Manager
 You can now optimize all of View Panel's tables under the settings menu
