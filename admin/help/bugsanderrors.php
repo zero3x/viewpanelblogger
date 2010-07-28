@@ -14,7 +14,7 @@
 <p>A: Either you have deleted a file or a rouge piece of code has. Restore from a backup or reinstall View Panel.</p>
 <p>&nbsp;</p>
 <p><a name="q6" id="q6"></a>Q: I get an access denied message and I haven't turned off / blocked the feature.</p>
-<p>A: Please check you have not turned off the feature by opening the settings page and making sure the enabled box is checked. If it is and the problem persists hen View Panel has a problem. Please get some help on the <a href="http://forum.StreetEye.info">forum</a>.</p>
+<p>A: Please check you have not turned off the feature by opening the settings page and making sure the enabled box is checked. Also make sure you are acting in the confines of your rank's permissions. If you know something's up please get some help on the <a href="http://forum.StreetEye.info">forum</a>.</p>
 <p>&nbsp;</p>
 <p><a name="q3" id="q3"></a>Q: View Panel could not connect to the database...</p>
 <p>A: This means what it says. To solve it try waiting about 10 minutes and trying again. If that fails then make sure the username and password you entered for your database settings are correct (you can check them in the settings page or in the settings MySQl table). If everything looks OK then contact someone on the forum at <a href="http://forum.StreetEye.info">forum.StreetEye.info</a></p>

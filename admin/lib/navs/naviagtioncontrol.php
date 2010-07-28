@@ -45,6 +45,8 @@ if ($page == "home") {
            include('lib/pages/accessdenied.php');
       } elseif ($page == "logout") {
 		  include('lib/scripts/logout.php');
+	  } elseif ($page == "accessdenied-show") {
+		  include('lib/pages/accessdenied.php');
 	  } elseif (isset($_GET['username'])) {
 		  include('lib/pages/profile.php');
 	  } else {

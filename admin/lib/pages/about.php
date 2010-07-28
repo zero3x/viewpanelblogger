@@ -1,3 +1,6 @@
+<?php
+checkrank(2, "<");
+?>
 <h1>About View Panel</h1>
 		    <h2>Tech Info</h2>
             <?php

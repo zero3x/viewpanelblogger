@@ -26,11 +26,11 @@ if(mysql_num_rows($usercheck) == 1){
 		if ($_COOKIE['View_Panel_ID'] != $_GET[username]) {
 			die("You are not logged in");
 		} else {
-$query = "SELECT email,age,avatar,location,gender,firstname,lastname FROM users WHERE username = '".$_GET[username]."'"; 
+$query = "SELECT email,age,avatar,location,gender,firstname,lastname,rank FROM users WHERE username = '".$_GET[username]."'"; 
 $output = mysql_query($query) or die(mysql_error());
 while($row = mysql_fetch_array($output)){	 
 echo "<form id='form1' name='form1' method='post' action='".$_SERVER['PHP_SELF']."?username=".$_GET[username]."'>";
-echo "<p>Edit Profile - $_GET[username]</p>";
+echo "<p><h2>Edit Profile - $_GET[username]</h2></p>";
 echo "<p><label>First Name:";
 echo "<input name='firstname' type='text' id='firstname' value='$row[firstname]' size='50' maxlength='50'></label></p>";
 echo "<p><label>Last Name:";
@@ -45,10 +45,14 @@ echo "			<option value='Male'>Male</option>";
 echo "			<option value='Female'>Female</option>";
 echo "			<option value='Not Specified'>Not Specified</option>";
 echo "		  </select></label></p>";
-echo "<p><label>Location";
+echo "<p><label>Location:";
 echo "		<input name='location' type='text' id='location' value='$row[location]' size='50' maxlength='50'></label></p>";
-echo "<p><label>Avatar";
+echo "<p><label>Avatar:";
 echo "		<input name='avatar' type='text' id='avatar' value='$row[avatar]' size='50'></label></p>";
+echo "<p><h2>Account Settings</h2></p>";
+echo "<p><label>Rank:";
+echo "		<input name='rank' type='text' id='rank' value='$row[rank]' size='50'></label></p>";
+echo "<h5>How do ranks work?</h5>";
 echo "<p><input type='submit' name='submit_editprofile' id='submit_editprofile' value='Submit'></p>";
 echo "	</form>	";	
 }

@@ -9,6 +9,21 @@
 ********************************************************************************
 *******************************************************************************/
 
+//Access Check
+function checkrank($aboverank, $operator = '==') {
+	$sql = "SELECT rank FROM users WHERE username = '".$_COOKIE['View_Panel_ID']."'";
+	$query = mysql_query($sql);
+	while($row = mysql_fetch_array($query)){
+		$user_rank = $row['rank'];
+	}
+	eval ('$rank_check = $aboverank' . $operator . '$user_rank ;') ;
+	if ($rank_check) {
+		
+	} else {
+		header("Location: panel.php?page=accessdenied-show");
+	}
+}
+
 //Destroy's Directory and all files / folders in it
 function destroydir ($dir) { 
 if ($handle = opendir($dir))
@@ -87,7 +102,7 @@ function get_num_users() {
 	echo "$num_rows\n";
 }
 
-function dirSize($directory) {                                                                      //TO BE REMOVED AS OFF 2.5
+function dirSize($directory) {                                                                     
     $size = 0;
     foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory)) as $file){
         $size+=$file->getSize();
