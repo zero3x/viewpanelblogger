@@ -13,14 +13,13 @@ include("../config.php");
 
 $tablename = $_POST['page'];
 $tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
-$sql="UPDATE introductions SET introduction='".$_POST[introduction]."' WHERE blogname='$tablenameclean'";
-
+$sql="UPDATE introductions SET introduction='".$_POST[introduction]."' WHERE blogname='".$_GET[blog]."'";
 if (!mysql_query($sql,$con))
   {
   die('Error: ' . mysql_error());
   echo " Please try again. If this problem persists please contact tech support. ";
   }
-
 View_Panel_MySQL_Kill();
-echo "<p>Blog post complete. Click <a href='../../login.php'>here</a> to return to the login page.</p>"
+echo "<p>Blog post complete. Click <a href='../../login.php'>here</a> to return to the login page.</p>";
+echo $tablenameclean;
 ?> 

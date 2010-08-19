@@ -17,7 +17,7 @@ include('databasesettings.php');
 $displayname = $_COOKIE['View_Panel_ID'];
 $page = $_GET['page'];
 
-$panelversion = "2.5 'Reality' RC1";     //The version of View Panel you are using
+$panelversion = "2.5 'Reality' R2";     //The version of View Panel you are using
 
 //Start Functions
 
@@ -37,4 +37,6 @@ mysql_select_db($dbname) or die(mysql_error());
 function View_Panel_MySQL_Kill() {
 	mysql_close($con);
 }
+
+//Javascript ANd Aja Stuff
 ?>

@@ -1,5 +1,12 @@
 Change Log
 
+===2.5 'Reality' R2===
+Ability to edit sidebars and add them to a theme. 
+Add tags to posts. 
+New theme functions.
+New blog header files.
+Theme functions now include an editable global variable which will replace any parameters defined in the function itself if it is set in the header file.
+
 ===2.5 'Reality' RC1===
 Fixed the access denied page if the user manager is turned off under settings
 Fixed the installer giving out an area.

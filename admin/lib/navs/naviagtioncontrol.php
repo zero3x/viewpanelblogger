@@ -49,6 +49,8 @@ if ($page == "home") {
 		  include('lib/pages/accessdenied.php');
 	  } elseif (isset($_GET['username'])) {
 		  include('lib/pages/profile.php');
+	  } elseif ($page == "sidebar") {
+	  include('lib/pages/sidebar.php');
 	  } else {
 		  include('lib/pages/error404.php');
 	  }

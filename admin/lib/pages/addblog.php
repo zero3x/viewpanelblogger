@@ -20,11 +20,17 @@
             </select>
           </label>
         </p>
-        <p>3
+        <p>
           <label>
             <input type="submit" name="submit" id="submit" value="Create" />
           </label>
-        the table.</p>
+        </p>
+        <p>== Advanced ==</p>
+        <p>Make default blog - Will rediect people to this blog. <strong>Check if this is your first blog</strong>! 
+          <label>
+            <input type="checkbox" name="default" id="default" />
+          </label>
+        </p>
       </blockquote>
     </form>
     <p>&nbsp; </p>

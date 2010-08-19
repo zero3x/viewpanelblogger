@@ -11,7 +11,6 @@
 ob_start();
 
 include("lib/config.php"); 
-
 if(isset($_COOKIE['View_Panel_ID'])) 
 { 
 $username = $_COOKIE['View_Panel_ID']; 

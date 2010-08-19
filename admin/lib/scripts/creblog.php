@@ -36,7 +36,8 @@ PRIMARY KEY(id),
 posttitle longtext,
 post longtext,
 author tinytext,
-date longtext
+date longtext,
+tags longtext
 )";
 
 mysql_query($sql,$con);
@@ -53,7 +54,27 @@ $insert = "INSERT INTO introductions (introduction) VALUES ('Thanks for choosing
 $insert ="UPDATE introductions SET introduction='Thanks for choosing View Panel as your blogging script! You can now make posts into this blog as well as edit this introduction.' WHERE blogname='$tablenameclean'";
 mysql_query($insert,$con);
 
+$sidebar_content = "<ul><li>Edit</li><li>This</li><li><a href='http://mysite.com/'>Link</a></li></ul>";
+$sidebar_content = mysql_real_escape_string($sidebar_content);
+$insert = "INSERT INTO sidebars (blogname) VALUES ('".$tablenameclean."')";
+mysql_query($insert,$con);
+
+$insert = "INSERT INTO sidebars (sidebar) VALUES ('".$sidebar_content."') WHERE blogname='$tablenameclean'";
+$insert ="UPDATE sidebars SET sidebar='".$sidebar_content."' WHERE blogname='$tablenameclean'";
+mysql_query($insert,$con);
+
+
 View_Panel_MySQL_Kill();
+
+//Create index file 
+if (isset($_POST['default'])) {
+$infofile = "<?php
+header('Location: ".$tablenameclean."');
+?>";
+$infofilewrite = fopen("../../../index.php","w");
+fwrite($infofilewrite, $infofile);
+fclose($infofilewrite);
+}
 
 //Make the base blog files
 mkdir("../../../".$tablenameclean."", 0777);
@@ -61,6 +82,7 @@ mkdir("../../../".$tablenameclean."", 0777);
 //Write theme include
 $infofile = "<?php
 include('lib/config.php');
+include('lib/header.php');
 include('../admin/lib/config.php');
 include('../admin/themes/".$theme."/theme.php');
 ?>";
@@ -77,6 +99,14 @@ $infofile = "<?php
 \$tablenameclean = strtolower(\$tablenameclean);
 ?>";
 $infofilewrite = fopen("../../../".$tablenameclean."/lib/config.php","w");
+fwrite($infofilewrite, $infofile);
+fclose($infofilewrite);
+
+//Blog header
+$infofile = "<?php
+//Header file
+?>";
+$infofilewrite = fopen("../../../".$tablenameclean."/lib/header.php","w");
 fwrite($infofilewrite, $infofile);
 fclose($infofilewrite);
 

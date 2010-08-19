@@ -1,34 +1,33 @@
 <?php 
-if (isset($_GET[blog])) {
+if(isset($_GET[blog])) {
 	$tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $_GET[blog]);
     $tablenameclean = strtolower($tablenameclean);
-	$sql = "SELECT introduction FROM introductions WHERE blogname = '".$tablenameclean."'";
+	$sql = "SELECT sidebar FROM sidebars WHERE blogname = '$tablenameclean'";
 	$query = mysql_query($sql);
 	while($row = mysql_fetch_array($query)){
-		$intro_content = $row['introduction'];
+		$sidebar_content = $row[sidebar];
 	}
 }
 
 if (isset($_GET[action])) {
-$sql="UPDATE introductions SET introduction='".$_POST[introduction]."' WHERE blogname='$tablenameclean'";
-if (!mysql_query($sql,$con))
+	$insert ="UPDATE sidebars SET sidebar='".$_POST['edit']."' WHERE blogname='".$_GET[blog]."'";
+	if (!mysql_query($insert,$con))
   {
   die('Error: ' . mysql_error());
   echo " Please try again. If this problem persists please contact tech support. ";
   }
-  echo "<div class='messagebox'>Introduction Saved!</div>";
+	echo "<div class='messagebox'>Sidebar Saved!</div>";
 }
-?>
-<h1>Edit A Blog Introduction</h1>
-<form name="form1" method="post" <?php echo "action='".$_SERVER['SCRIPT_NAME']."?page=editintro&blog=".$tablenameclean."&action=change'"; ?>>
-		      <label>
-		        <blockquote>
-	              <p>This introduction will be in the 
-	                <select name="page" id="page" ONCHANGE="location = this.options[this.selectedIndex].value;">
-        <?php View_Panel_Blog_Lister(); ?>
-                    </select>
-	              blog.</p>
-	              <table width="532" border="0">
+	?>
+    <h1>Sidebar Control</h1>
+    <p>You know that bar at the side? Yeh, you edit that here.</p>
+    <form id="form1" name="form1" method="post" <?php echo "action='".$_SERVER['SCRIPT_NAME']."?page=sidebar&blog=".$tablenameclean."&action=change'"; ?>>
+      <p>1. What blog's that sidebar in:
+        <select name="page" id="page" ONCHANGE="location = this.options[this.selectedIndex].value;">
+          <?php View_Panel_Blog_Lister(); ?>
+        </select>
+      </p>
+      <table width="532" border="0">
 	                <tr>
 	                  <td width="60">Insert tag:</td>
 	                  <td width="90"><select name="jumpMenu" id="jumpMenu">
@@ -50,13 +49,16 @@ if (!mysql_query($sql,$con))
                         </select>
                       </label></td>
                     </tr>
-                  </table>
-	              <p>
-	                <textarea name="introduction" id="introduction" cols="110" rows="15"><?php echo $intro_content; ?></textarea>
-	              </p>
-	              <p>
-	                <input type="submit" name="save" id="save" value="Post">
-                  </p>
-	            </blockquote>
-		      </label>
-		    </form>
+      </table>
+      <p>
+        <textarea name="edit" id="edit" cols="110" rows="15"><?php echo $sidebar_content; ?></textarea>
+      </p>
+      <p>
+        <label>
+          <input type="submit" name="submit" id="submit" value="Save" />
+        </label>
+      </p>
+  </form>
+
+
+

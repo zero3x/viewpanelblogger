@@ -48,6 +48,7 @@
          <li><a href="?page=editintro">Edit Introduction</a></li>
 		 <li><a href="?page=createblog">New Blog</a></li>
 		 <li><a href="?page=deleteblog">Remove Blog</a></li>
+         <li><a href="?page=sidebar">Sidebars</a></li>
          </ul> <!-- Dropdown End -->
          </li>
          <li><a href="?page=filemanager">File Manager</a></li>
@@ -78,7 +79,9 @@
 					    <div class="block_header"></div>
 						<h3>Stats</h3>
 						<p>Total Users: <?php get_num_users(); ?></p>
-						<p>View Panel Size: <?php dirSize($directory); ?></p>
+						<p>Mem Useage: <?php $memoryinmb = memory_get_usage(); $memoryinmb = $memoryinmb / 1024; echo $memoryinmb; ?> MB.</p>
+                        <p>Total File Size: <?php $spaceinmb = dirsize("../"); $spaceinmb = $spaceinmb / 1048576; echo $spaceinmb; ?> MB.</p>
+
                         <div class="block_bottom"></div>
 					</div>	
 					<!--Sub Nav-->

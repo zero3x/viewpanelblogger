@@ -27,6 +27,14 @@ if(!$handle)
 }
 echo "page_lister record deleted successfully <br \>";
 
+$sql = "DELETE FROM sidebars WHERE blogname = '$tablenameclean'";
+$handle = mysql_query($sql, $con );
+if(!$handle)
+{
+  die('Could not delete record from sidebars table: ' . mysql_error());
+}
+echo "sidebars record deleted successfully <br \>";
+
 View_Panel_MySQL_Kill();
 
 //Remove blog files
