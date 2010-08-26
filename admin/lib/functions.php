@@ -84,6 +84,7 @@ function View_Panel_Page_Lister() {
 
 function View_Panel_Blog_Lister($output_get = 'blog') {
 	$result = mysql_query("SELECT * FROM page_lister");
+	echo "<option></option>";
 	while($row = mysql_fetch_array($result)) {
 		echo "<option value='".$_SERVER['SCRIPT_NAME']."?page=".$_GET[page]."&".$output_get."=".$row['pageName']."'>".$row['pageName']."</option>";
 	}
@@ -93,7 +94,13 @@ function View_Panel_Blog_Lister($output_get = 'blog') {
 function View_Panel_Theme_Lister() {
 	$dir = "themes";
 	$themes = scandir($dir);
+if(empty($themes))
+   {
+     return false;
+   }
+
 	foreach($themes as $theme) {
+                
 		if ($theme == "." or $theme == ".." or $theme == "index.php") {
 		} else {
 		echo "<option name='$theme'>$theme</option>";
@@ -108,14 +115,19 @@ function get_num_users() {
 	echo "$num_rows\n";
 }
 
-function dirsize($path){
+/* function dirsize($path){
 if(!file_exists($path)) return 0;
 if(is_file($path)) return filesize($path);
 $ret = 0;
+if(empty($path))
+   {
+     return false;
+     echo "Not Supported On Server.";
+   }
 foreach(glob($path."/*") as $fn)
 $ret += dirsize($fn);
 return $ret." bytes";
-} 
+} */
 
 
 //Blog Functions
