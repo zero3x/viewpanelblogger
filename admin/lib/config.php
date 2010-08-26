@@ -17,7 +17,7 @@ include('databasesettings.php');
 $displayname = $_COOKIE['View_Panel_ID'];
 $page = $_GET['page'];
 
-$panelversion = "2.5 'Reality' R2";     //The version of View Panel you are using
+$panelversion = "2.5 'Reality' R3";     //The version of View Panel you are using
 
 //Start Functions
 
