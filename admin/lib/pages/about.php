@@ -4,8 +4,8 @@
 		    echo "Using Panel Version: ".$panelversion.".<br />";
            
 		    echo "Current Panel Version is ";
-			$current = ("http://streeteye.info/viewpanel/versiontracker/viewpanelversiontracker.php");
-			echo ".<br /><br />";
+			$current = file_get_contents('http://streeteye.info/viewpanel/versiontracker/viewpanelversiontracker.php');
+			echo $current.".<br /><br />";
 			if ($current == $panelversion) {
 				echo "Your version is up to date. <br />";
 			} else {

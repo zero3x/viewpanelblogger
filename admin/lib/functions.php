@@ -115,8 +115,8 @@ function get_num_users() {
 	echo "$num_rows\n";
 }
 
-/* function dirsize($path){
-if(!file_exists($path)) return 0;
+function dirsize($path){
+/*if(!file_exists($path)) return 0;
 if(is_file($path)) return filesize($path);
 $ret = 0;
 if(empty($path))
@@ -126,10 +126,17 @@ if(empty($path))
    }
 foreach(glob($path."/*") as $fn)
 $ret += dirsize($fn);
-return $ret." bytes";
-} */
+return $ret." bytes";*/
+}
 
-
+function View_Panel_Get_Version() {
+	$current = file_get_contents('http://streeteye.info/viewpanel/versiontracker/viewpanelversiontracker.php');
+	if ($current == $panelversion) {
+		return true;
+	} else {
+		return false;
+}
+}
 //Blog Functions
 function out_intro($border = '0', $introclass = 'introduction') {
 	include("lib/config.php");
@@ -342,7 +349,8 @@ function out_sidebar() {
 	$query = "SELECT id,sidebar FROM sidebars WHERE blogname ='". $GLOBALS['tablenameclean'] ."'"; 
     $output = mysql_query($query) or die(mysql_error());
 	while($row = mysql_fetch_array($output)){
-		echo $row[sidebar];
+		$sidebar_out = stripslashes($row[sidebar]);
+		echo $sidebar_out;
 	}
 }
 

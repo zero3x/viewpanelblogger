@@ -5,12 +5,14 @@ if(isset($_GET[blog])) {
 	$sql = "SELECT sidebar FROM sidebars WHERE blogname = '$tablenameclean'";
 	$query = mysql_query($sql);
 	while($row = mysql_fetch_array($query)){
-		$sidebar_content = $row[sidebar];
+		$sidebar_content = stripslashes($row[sidebar]);
 	}
 }
 
 if (isset($_GET[action])) {
-	$insert ="UPDATE sidebars SET sidebar='".$_POST['edit']."' WHERE blogname='".$_GET[blog]."'";
+	$sidebar_content = nl2br($_POST['edit']);
+    $sidebar_content = mysql_real_escape_string($sidebar_content);
+	$insert ="UPDATE sidebars SET sidebar='".$sidebar_content."' WHERE blogname='".$_GET[blog]."'";
 	if (!mysql_query($insert,$con))
   {
   die('Error: ' . mysql_error());
