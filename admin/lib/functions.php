@@ -145,6 +145,7 @@ function out_intro($border = '0', $introclass = 'introduction') {
 	$query = "SELECT introduction FROM introductions WHERE blogname='". $GLOBALS['tablenameclean'] ."'"; 
     $output = mysql_query($query) or die(mysql_error());
 	while($row = mysql_fetch_array($output)){
+             $intro_out = stripslashes($row[introduction]);
 	    echo "<table border='".$border."' class='".$introclass."'>"; 
 		echo "<tr>";
 		echo "<td>".$row[introduction]."</td>";
@@ -187,26 +188,29 @@ function out_expanded($border = '0', $author = 'Posted by', $date = 'on', $layou
 		$query = "SELECT posttitle,post,author,date FROM ". $GLOBALS['tablenameclean'] ." WHERE id = $_GET[postid]"; 
 		$output = mysql_query($query) or die(mysql_error());
 		while($row = mysql_fetch_array($output)){
+                $title_out = stripslashes($row[posttitle]);
+                $content_out = stripslashes($row[post]);
+                $author_out = stripslashes($row[author]);
 		echo "<table border='".$border."' class='".$titleclass."'>"; 
 		echo "<tr>";
-		echo "<td>".$row[posttitle]."</td>";
+		echo "<td>".$title_out."</td>";
 		echo "</tr>";
 		echo "</table>";
 		if ($layout_1 = "post") {
 			echo "<table border='".$border."' class='".$postclass."'>"; 
 			echo "<tr>";
-			echo "<td>".$row[post]."</td>";
+			echo "<td>".$content_out."</td>";
 			echo "</tr>";
 			echo "</table>";
 		} else {
-			$authortime_combine = "".$author." ".$row['author']." ".$date." ".$row['date'];
+			$authortime_combine = "".$author." ".$author_out." ".$date." ".$row['date'];
 			echo "<table border='".$border."' class='".$author_timeclass."'>";
 			echo "<tr>";
 			echo "<td>".$authortime_combine."</td>";
 			echo "</tr>";
 			echo "</table>";
 		} if ($layout_2 = "author") {
-			$authortime_combine = "".$author." ".$row['author']." ".$date." ".$row['date'];
+			$authortime_combine = "".$author." ".$author_out." ".$date." ".$row['date'];
 			echo "<table border='".$border."' class='".$author_timeclass."'>";
 			echo "<tr>";
 			echo "<td>".$authortime_combine."</td>";
@@ -215,7 +219,7 @@ function out_expanded($border = '0', $author = 'Posted by', $date = 'on', $layou
 		} else {
 			echo "<table border='".$border."' class='".$postclass."'>"; 
 			echo "<tr>";
-			echo "<td>".$row[post]."</td>";
+			echo "<td>".$content_out."</td>";
 			echo "</tr>";
 			echo "</table>";
 		}
@@ -259,12 +263,17 @@ function out_posts($border = '0', $author = 'Posted by', $date = 'on', $layout_1
 	$query = "SELECT id,posttitle,post,author,date FROM ". $GLOBALS['tablenameclean'] ." ORDER BY id DESC"; 
     $output = mysql_query($query) or die(mysql_error());
 	while($row = mysql_fetch_array($output)){
-		$postcontent_fetched = $row[post];
+                $title_out = stripslashes($row[posttitle]);
+                $content_out = stripslashes($row[post]);
+                $author_out = stripslashes($row[author]);
+                $postcontent_fetched = $content_out;
+                if (strlen($postcontent_fetched) > $charsper) {;
 		$postcontent_fetched = substr($postcontent_fetched, 0, $charsper);
 		$postcontent_fetched = $postcontent_fetched."...";
+         }
 	echo "<table border='".$border."' class='".$titleclass."'>"; 
 	echo "<tr>";
-	echo "<td>".$row[posttitle]."</td>";
+	echo "<td>".$title_out."</td>";
 	echo "</tr>";
 	echo "</table>";
 	if ($layout_1 = "post") {
@@ -274,14 +283,14 @@ function out_posts($border = '0', $author = 'Posted by', $date = 'on', $layout_1
 		echo "</tr>";
 		echo "</table>";
 	} else {
-		$authortime_combine = "".$author." ".$row['author']." ".$date." ".$row['date'];
+		$authortime_combine = "".$author." ".$author_out." ".$date." ".$row['date'];
 		echo "<table border='".$border."' class='".$author_timeclass."'>";
 		echo "<tr>";
 		echo "<td>".$authortime_combine."</td>";
 		echo "</tr>";
 		echo "</table>";
 	} if ($layout_2 = "author") {
-		$authortime_combine = "".$author." ".$row['author']." ".$date." ".$row['date'];
+		$authortime_combine = "".$author." ".$author_out." ".$date." ".$row['date'];
 		echo "<table border='".$border."' class='".$author_timeclass."'>";
 		echo "<tr>";
 		echo "<td>".$authortime_combine." | <a href='?postid=".$row['id']."'>Readmore</a></td>";

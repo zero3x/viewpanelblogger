@@ -13,7 +13,10 @@ include("../config.php");
 
 $tablename = $_POST['page'];
 $tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
-$sql="UPDATE introductions SET introduction='".$_POST[introduction]."' WHERE blogname='".$_GET[blog]."'";
+$tablenameclean = strtolower($tablenameclean);
+$introedit = nl2br($_POST['author']);
+$introedit = mysql_real_escape_string($postauthor);
+$sql="UPDATE introductions SET introduction='".$introedit."' WHERE blogname='".$tablenameclean."'";
 if (!mysql_query($sql,$con))
   {
   die('Error: ' . mysql_error());

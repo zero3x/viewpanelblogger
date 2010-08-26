@@ -6,8 +6,12 @@ $tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
 $tablenameclean = strtolower($tablenameclean);
 $idtoedit = $_GET['id'];
 $editbox = nl2br($_POST['edit']);
-
-$sql="UPDATE $tablenameclean SET posttitle='".$_POST[posttitle]."', post='".$editbox."', author='".$_POST[author]."' WHERE id = '$idtoedit'";
+$editbox = mysql_real_escape_string($editbox);
+$posttitle = nl2br($_POST['posttitle']);
+$posttitle = mysql_real_escape_string($posttitle);
+$postauthor = nl2br($_POST['author']);
+$postauthor = mysql_real_escape_string($postauthor);
+$sql="UPDATE $tablenameclean SET posttitle='".$posttitle."', post='".$editbox."', author='".$postauthor."' WHERE id = '$idtoedit'";
 
 $handle = mysql_query($sql, $con );
 if(!$handle)

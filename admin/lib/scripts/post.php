@@ -16,11 +16,17 @@ $time_a = ($timeoffset * 120);
 $posttime = date("F j, Y, g:i a",time() + $time_a);
 
 $editbox = nl2br($_POST['edit']);
+$editbox = mysql_real_escape_string($editbox);
+$posttitle = nl2br($_POST['posttitle']);
+$posttitle = mysql_real_escape_string($posttitle);
+$postauthor = nl2br($_POST['author']);
+$postauthor = mysql_real_escape_string($postauthor);
+
 $tablename = $_POST["page"];
 $tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
 $tablenameclean = strtolower($tablenameclean);
 $sql="INSERT INTO $tablenameclean (posttitle, post, author, date)
-VALUES('".$_POST[posttitle]."','".$editbox."','".$_POST[author]."','".$posttime."')";
+VALUES('".$posttitle."','".$editbox."','".$postauthor."','".$posttime."')";
 
 if (!mysql_query($sql,$con))
   {
