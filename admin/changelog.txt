@@ -1,9 +1,12 @@
 Change Log
+
 ===2.5 R3 Stable===
 Fixed bugs to do with blog posting and editing.
 Fixed bugs to do with introduction editing.
 Fixed bugs to do with sidebar editing.
 About page now fetches version correctly.
+Settings Page niow displays help icons
+Removed old core_theme images 
 
 ===2.5 'Reality' R2===
 Ability to edit sidebars and add them to a theme. 
