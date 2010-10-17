@@ -9,7 +9,7 @@
 ********************************************************************************
 *******************************************************************************/
 
-//Access Check
+//Security Functions
 function checkrank($aboverank, $operator = '==') {
 	$sql = "SELECT rank FROM users WHERE username = '".$_COOKIE['View_Panel_ID']."'";
 	$query = mysql_query($sql);
@@ -22,6 +22,10 @@ function checkrank($aboverank, $operator = '==') {
 	} else {
 		header("Location: panel.php?page=accessdenied-show");
 	}
+}
+
+function checklogin() {
+	
 }
 
 //Destroy's Directory and all files / folders in it
@@ -360,6 +364,14 @@ function out_footer($author=NULL, $copyright=NULL) {
 		$copyright = $GLOBALS['header_override']['footer']['copyright'];
 	}
 	echo "Copyright 2010 ".$copyright." | ".$author." | <a href='http://viewpanel.streeteye.info'>Powered by View Panel</a>";
+}
+
+function out_navbar($navid = 'navbar') {
+	echo "<div id='$navid'>
+            <ul>
+                <li><a href=''>Home</a></li>
+		    </ul>
+	</div>";
 }
 
 /* function out_loginform () {
