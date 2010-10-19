@@ -1,5 +1,12 @@
 Change Log
 
+===2.6 'Xenon' RC1===
+Members can add comments to posts.
+Ability to edit theme files from the control panel.
+Add tags to posts. 
+Mod Framework Base - Ability for public signup and more.
+Fixed error on BLOGNAME/lib/config.php on line 2.
+
 ===2.5 R3 Stable===
 Fixed bugs to do with blog posting and editing.
 Fixed bugs to do with introduction editing.

@@ -22,6 +22,8 @@ die('You did not complete all of the required fields. Please go back and try aga
 
 $tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
 $tablenameclean = strtolower($tablenameclean);
+$tablename = addslashes($tablename);
+$tabledesc = addslashes($tabledesc);
 
 $sql="SELECT * FROM $tablenameclean";
 $result =  @mysql_query($sql);
@@ -95,6 +97,8 @@ mkdir("../../../".$tablenameclean."/lib", 0777);
 $infofile = "<?php
 \$blogname = '".$tablename."';
 \$blogdesc = '".$tabledesc."';
+\$blogname = stripslashes($blogname);
+\$blogdesc = stripslashes($blogdesc);
 \$tablenameclean = preg_replace('/[^a-zA-Z0-9]/', '', '".$tablename."');
 \$tablenameclean = strtolower(\$tablenameclean);
 ?>";

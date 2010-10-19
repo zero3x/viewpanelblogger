@@ -86,7 +86,10 @@ function yellowit() {
 	              <p>
 	                <input name="author" type="text" id="author" value="Author" size="80">
 	              </p>
-          </fieldset>
+	              <p>
+	                <input name="tags" type="text" id="tags" value="Tags (seperate with space)" size="80" />
+	              </p>
+              </fieldset>
 	              <h3>Attach A File </h3>
 	              <fieldset>
 	                

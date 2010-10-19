@@ -76,22 +76,22 @@ else
 
 <body>
 <p>To use View Panel please login.</p>
-<form id="form1" name="form1" method="post" action="<?php echo $_SERVER['PHP_SELF']?>" >
+<form id='form1' name='form1' method='post' action='<?php echo $_SERVER['PHP_SELF']?>' >
   <p>
     <label>
       Username: 
-      <input name="username" type="text" id="username" maxlength="15" />
+      <input name='username' type='text' id='username' maxlength='15' />
     </label>
   </p>
   <p>
     <label>
       Password: 
-      <input name="pass" type="password" id="pass" maxlength="15" />
+      <input name='pass' type='password' id='pass' maxlength='15' />
     </label>
   </p>
   <p>
     <label>
-      <input type="submit" name="submit" id="submit" value="Submit" />
+      <input type='submit' name='submit' id='submit' value='Submit' />
     </label>
   </p>
 </form>

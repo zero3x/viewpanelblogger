@@ -21,12 +21,13 @@ $posttitle = nl2br($_POST['posttitle']);
 $posttitle = mysql_real_escape_string($posttitle);
 $postauthor = nl2br($_POST['author']);
 $postauthor = mysql_real_escape_string($postauthor);
+$tags = mysql_real_escape_string($_POST['tags']);
 
 $tablename = $_POST["page"];
 $tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
 $tablenameclean = strtolower($tablenameclean);
-$sql="INSERT INTO $tablenameclean (posttitle, post, author, date)
-VALUES('".$posttitle."','".$editbox."','".$postauthor."','".$posttime."')";
+$sql="INSERT INTO $tablenameclean (posttitle, post, author, date, tags)
+VALUES('".$posttitle."','".$editbox."','".$postauthor."','".$posttime."','".$tags."')";
 
 if (!mysql_query($sql,$con))
   {

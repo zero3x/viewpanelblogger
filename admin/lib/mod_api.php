@@ -74,11 +74,106 @@ function mod_add_other ($filename, $filelocation, $content) {
 }
 
 function mod_show_login () {
-	
+	if ($_GET[loginvt] == 'yes') {
+		if(!$_POST['username'] | !$_POST['pass']) {
+	   return("fields");
+	}
+	//Prevent injection 
+	$username = mysql_real_escape_string($_POST['username']);
+	$password = mysql_real_escape_string($_POST['pass']);
+
+	$check = mysql_query("SELECT * FROM users WHERE username = '".$username."'")or die(mysql_error());
+	$check2 = mysql_num_rows($check);
+	if ($check2 == 0) {
+	  return("nouser");
+		}
+	while($info = mysql_fetch_array( $check )) 
+	{
+	$password = stripslashes($password);
+	$info['password'] = stripslashes($info['password']);
+	$password = md5($password);
+	if ($password != $info['password']) {
+	   return("incorrectpass");
+	} else {
+		$username = stripslashes($username); 
+		$hour = time() + 3600; 
+		setcookie("View_Panel_ID", $username, $hour, "/"); 
+		setcookie("View_Panel_Key", $password, $hour, "/"); 
+		return("true");
+	}
+	} else {
+	echo "<form id='form1' name='form1' method='post' action='".$_SERVER['PHP_SELF']."?loginvt=yes' >
+  <p>
+    <label>
+      Username: 
+      <input name='username' type='text' id='username' maxlength='15' />
+    </label>
+  </p>
+  <p>
+    <label>
+      Password: 
+      <input name='pass' type='password' id='pass' maxlength='15' />
+    </label>
+  </p>
+  <p>
+    <label>
+      <input type='submit' name='submit' id='submit' value='Submit' />
+    </label>
+  </p>
+</form>";
+	}
 }
 
 function mod_show_register () {
-	
+	if ($_GET[registervt] == 'yes') {
+		if(!$_POST['username'] | !$_POST['pass']) {
+	   return("fields");
+	}
+	//Prevent injection 
+	$username = mysql_real_escape_string($_POST['username']);
+	$password = mysql_real_escape_string($_POST['pass']);
+
+	$check = mysql_query("SELECT * FROM users WHERE username = '".$username."'")or die(mysql_error());
+	$check2 = mysql_num_rows($check);
+	if ($check2 == 0) {
+	  //Do stuff
+		} else {
+			return("exists");
+		}
+	while($info = mysql_fetch_array( $check )) 
+	{
+	$password = stripslashes($password);
+	$info['password'] = stripslashes($info['password']);
+	$password = md5($password);
+	if ($password != $info['password']) {
+	   return("incorrectpass");
+	} else {
+		$username = stripslashes($username); 
+		$hour = time() + 3600; 
+		setcookie("View_Panel_ID", $username, $hour, "/"); 
+		setcookie("View_Panel_Key", $password, $hour, "/"); 
+		return("true");
+	}
+	} else {
+	echo "<form id='form1' name='form1' method='post' action='".$_SERVER['PHP_SELF']."?registervt=yes' >
+  <p>
+    <label>
+      Username: 
+      <input name='username' type='text' id='username' maxlength='15' />
+    </label>
+  </p>
+  <p>
+    <label>
+      Password: 
+      <input name='pass' type='password' id='pass' maxlength='15' />
+    </label>
+  </p>
+  <p>
+    <label>
+      <input type='submit' name='submit' id='submit' value='Submit' />
+    </label>
+  </p>
+</form>";
 }
 
 function mod_loadlib_external ($libloc) {
