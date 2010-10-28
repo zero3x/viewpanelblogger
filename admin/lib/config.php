@@ -35,8 +35,8 @@ mysql_select_db($dbname) or die(mysql_error());
 
 //Terminates MySQL connection
 function View_Panel_MySQL_Kill() {
-	mysql_close($con);
+	mysql_close($GLOBALS['con']);
 }
 
-//Javascript ANd Aja Stuff
+//Javascript And Ajax Stuff
 ?>

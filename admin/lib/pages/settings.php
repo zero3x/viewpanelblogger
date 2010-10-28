@@ -15,10 +15,21 @@ while ($table = mysql_fetch_assoc($alltables))
 
 exit("Tables optimized");
 }
+
+//Set settings variables from database.
+$result = mysql_query("SELECT * FROM vpmainsettings");
+	while($row = mysql_fetch_array($result)) {
+		$siteurl = $row['siteurl'];
+		$filesize_limit = $row['uploadlimit'];
+		$fileview_enabled = $row['fileviewer'];
+		$databaseview_enabled = $row['usermanager'];
+		$timeoffset = $row['timeoffset'];
+	}
+}
 ?>
     <form id="form1" name="form1" method="post" action="lib/scripts/savesettings.php">
     <h1>Settings</h1>
-      <p>Here you can edit some settings used in the operation of View Panel. To see the other variables you'll have to open config.php manually.      </p>
+      <p>Here you can edit some settings used in the operation of View Panel.</p>
       <table style="width=:703px; height=:257px; border:1px solid;">
         <tr>
           <td height="21" colspan="2" align="center"><h2>General Settings</h2></td>
@@ -28,6 +39,37 @@ exit("Tables optimized");
           <td width="450"><label>
             <input name="websiteurl" type="text" id="websiteurl" value=<?php echo $siteurl; ?> size="70" />
           </label></td>
+        </tr>
+        <tr>
+          <td height="21"><strong>Time Offset</strong></td>
+          <td><select name='timeoffset' id='timeoffset'>
+            <option <?php if ($timeoffset == "-39600") { echo "selected"; } ?> value='-39600'>GMT - 11</option>
+            <option <?php if ($timeoffset == "-36000") { echo "selected"; } ?> value='-36000'>GMT - 10</option>
+            <option <?php if ($timeoffset == "-32400") { echo "selected"; } ?> value='-32400'>GMT - 9</option>
+            <option <?php if ($timeoffset == "-28800") { echo "selected"; } ?> value='-28800'>GMT - 8</option>
+            <option <?php if ($timeoffset == "-25200") { echo "selected"; } ?> value='-25200'>GMT - 7</option>
+            <option <?php if ($timeoffset == "-21600") { echo "selected"; } ?> value='-21600'>GMT - 6</option>
+            <option <?php if ($timeoffset == "-18000") { echo "selected"; } ?> value='-18000'>GMT - 5</option>
+            <option <?php if ($timeoffset == "-14400") { echo "selected"; } ?> value='-14400'>GMT - 4</option>
+            <option <?php if ($timeoffset == "-10800") { echo "selected"; } ?> value='-10800'>GMT - 3</option>
+            <option <?php if ($timeoffset == "-7200") { echo "selected"; } ?> value='-7200'>GMT - 2</option>
+            <option <?php if ($timeoffset == "-3600") { echo "selected"; } ?> value='-3600'>GMT - 1</option>
+            <option <?php if ($timeoffset == "0") { echo "selected"; } ?> value='0'>GMT </option>
+            <option <?php if ($timeoffset == "3600") { echo "selected"; } ?> value='3600'>GMT + 1</option>
+            <option <?php if ($timeoffset == "7200") { echo "selected"; } ?> value='7200'>GMT + 2</option>
+            <option <?php if ($timeoffset == "10800") { echo "selected"; } ?> value='10800'>GMT + 3</option>
+            <option <?php if ($timeoffset == "14400") { echo "selected"; } ?> value='14400'>GMT + 4</option>
+            <option <?php if ($timeoffset == "18000") { echo "selected"; } ?> value='18000'>GMT + 5</option>
+            <option <?php if ($timeoffset == "21600") { echo "selected"; } ?> value='21600'>GMT + 6</option>
+            <option <?php if ($timeoffset == "25200") { echo "selected"; } ?> value='25200'>GMT + 7</option>
+            <option <?php if ($timeoffset == "28800") { echo "selected"; } ?> value='28800'>GMT + 8</option>
+            <option <?php if ($timeoffset == "32400") { echo "selected"; } ?> value='32400'>GMT + 9</option>
+            <option <?php if ($timeoffset == "36000") { echo "selected"; } ?> value='36000'>GMT + 10</option>
+            <option <?php if ($timeoffset == "39600") { echo "selected"; } ?> value='39600'>GMT + 11</option>
+            <option <?php if ($timeoffset == "43200") { echo "selected"; } ?> value='43200'>GMT + 12</option>
+            <option <?php if ($timeoffset == "46800") { echo "selected"; } ?> value='46800'>GMT + 13</option>
+            <option <?php if ($timeoffset == "50400") { echo "selected"; } ?> value='50400'>GMT + 14</option>
+          </select></td>
         </tr>
         <tr>
           <td height="21"><p><strong>Maximum File Size</strong></p></td>

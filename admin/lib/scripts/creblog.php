@@ -45,7 +45,7 @@ tags longtext
 mysql_query($sql,$con);
 echo "Your posts table has been created";
 
-$insert = "INSERT INTO page_lister (pageName, pageDesc)
+$insert = "INSERT INTO blog_lister (pageName, pageDesc)
 VALUES ('".$tablename."', '".$tabledesc."')";
 mysql_query($insert,$con);
 

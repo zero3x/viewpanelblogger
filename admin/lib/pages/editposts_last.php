@@ -52,7 +52,7 @@ function yellowit() {
     <form id="form2" name="form2" method="post" action="<?php echo $_SERVER['PHP_SELF']."?page=editposts"; ?>">
       Select Blog: 
       <select name="page" id="page">
-        <?php View_Panel_Page_Lister(); ?>
+        <?php View_Panel_blog_lister(); ?>
       </select>
       <input type="submit" name="submit_blog" id="submit_blog" value="Continue" />
     </form>

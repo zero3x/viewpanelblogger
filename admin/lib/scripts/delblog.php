@@ -19,13 +19,13 @@ if(!$handle)
 }
 echo "Table deleted successfully <br \>";
 
-$sql = "DELETE FROM page_lister WHERE pageName = '$tablename'";
+$sql = "DELETE FROM blog_lister WHERE pageName = '$tablename'";
 $handle = mysql_query($sql, $con );
 if(!$handle)
 {
-  die('Could not delete record from page_lister table: ' . mysql_error());
+  die('Could not delete record from blog_lister table: ' . mysql_error());
 }
-echo "page_lister record deleted successfully <br \>";
+echo "blog_lister record deleted successfully <br \>";
 
 $sql = "DELETE FROM sidebars WHERE blogname = '$tablenameclean'";
 $handle = mysql_query($sql, $con );

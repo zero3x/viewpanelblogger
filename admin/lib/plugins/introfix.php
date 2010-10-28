@@ -44,7 +44,7 @@ echo "<p>The Intro Hotfix has finished. You may now remove this script from the 
   <p>
     <label>Select Blog To Fix
       <select name="page" id="page">
-        <?php View_Panel_Page_Lister(); ?>
+        <?php View_Panel_blog_lister(); ?>
                     </select>
     </label>
   </p>

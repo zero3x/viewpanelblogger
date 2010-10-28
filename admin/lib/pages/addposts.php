@@ -47,7 +47,7 @@ function yellowit() {
             <fieldset>
 	          <p>This post will be in the 
 	                <select name="page" id="page">
-        <?php View_Panel_Page_Lister(); ?>
+        <?php View_Panel_blog_lister(); ?>
                 </select>
               blog</p></fieldset>
                   <fieldset>

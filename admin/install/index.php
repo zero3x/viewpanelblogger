@@ -141,21 +141,36 @@ if( isset($_GET['action']) ) {
 		echo "<p>Creating tables.</p>";
 		
 		mysql_select_db($dbname, $con);
-		$sql = "CREATE TABLE page_lister
+		$sql = "CREATE TABLE blog_lister
 		(
 		id mediumint(9) NOT NULL AUTO_INCREMENT, 
 		PRIMARY KEY(id),
-		pageName varchar(60),
-		pageDesc varchar(60)
+		pageName longtext,
+		pageDesc longtext,
+		logoImage longtext,
+		theme longtext
 		)";
 		
 		mysql_query($sql,$con);
 		echo "<p>Page Listing table created</p>";
 		
+				mysql_select_db($dbname, $con);
+		$sql = "CREATE TABLE viewpanel_themes
+		(
+		id mediumint(9) NOT NULL AUTO_INCREMENT, 
+		PRIMARY KEY(id),
+		themename longtext,
+		themeauthor longtext,
+		themelocation longtext
+		)";
+		
+		mysql_query($sql,$con);
+		echo "<p>Themes table created</p>";
+		
 		sleep(2);
 		
 		mysql_select_db($dbname, $con);
-		$sql = "CREATE TABLE plugin_lister
+		$sql = "CREATE TABLE mod_lister
 		(
 		id mediumint(9) NOT NULL AUTO_INCREMENT, 
 		PRIMARY KEY(id),
@@ -201,16 +216,33 @@ if( isset($_GET['action']) ) {
 		sleep(2);
 		
 		mysql_select_db($dbname, $con);
-		$sql = "CREATE TABLE sidebars
+                $sql = "CREATE TABLE sidebars
+                (
+                id mediumint(9) NOT NULL AUTO_INCREMENT, 
+                PRIMARY KEY(id),
+                blogname longtext,
+                sidebar longtext
+                )";
+                mysql_query($sql,$con);
+                echo "<p>Your sidebars table has been created</p>";
+
+		
+		mysql_select_db($dbname, $con);
+		$sql = "CREATE TABLE vpmainsettings
 		(
-		id mediumint(9) NOT NULL AUTO_INCREMENT, 
-		PRIMARY KEY(id),
-		blogname longtext,
-		sidebar longtext
+		timeoffset longtext,
+		fileviewer longtext,
+		usermanager longtext,
+		uploadlimit longtext
+		siteurl longtext
 		)";
 		mysql_query($sql,$con);
-		echo "<p>Your sidebars table has been created</p>";
+		echo "<p>Settings table created.</p>";
 
+        $insert = "INSERT INTO vpmainsettings (timeoffset, fileviewer, usermanager, uploadlimit, siteurl)
+		VALUES ('".$timeoffset."', 'enabled', 'disabled', '', '".$websiteUrl."')";
+		$add_member = mysql_query($insert);
+		
 		mysql_close($con);
 		
 		chmod("../lib", 0755);
@@ -220,6 +252,7 @@ if( isset($_GET['action']) ) {
 		fwrite($siteurlfile, $surlcontent);
 		fclose($installdonefile);
 		
+		//replace any refrences to timeoffset, file or user viewer, upload limit and url which call on this file to call on above table.
 		$encryptpass = base64_encode($dbpass);
 		$dbfilehandle = fopen("../lib/databasesettings.php","w");
 		$dbvariableshandle = "<?php\n
@@ -227,8 +260,6 @@ if( isset($_GET['action']) ) {
 		\$dbpass ='".$encryptpass."'; //Password of database user. \n
 		\$dbname ='".$dbname."'; //The name of the database. \n
 		\$localdatabase ='".$localdatabase."'; //The location of the database. \n
-		\$siteurl ='".$websiteUrl."'; //The user defined URL of the blog. \n
-		\$timeoffset ='".$timeoffset."'; //The timeoffset. \n
 		\$fileview_enabled ='disabled'; //Enables of disables the file viewer.\n
 		\$databaseview_enabled ='disabled'; //Enables or disables the user manager. \n
 		\$filesize_limit = ''; //The limit in ... of files uploaded by normal users. \n

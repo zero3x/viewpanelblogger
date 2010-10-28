@@ -12,6 +12,11 @@
 include("../config.php");
 
 //GET TEH TIME!
+$result = mysql_query("SELECT * FROM vpmainsettings");
+	while($row = mysql_fetch_array($result)) {
+		$timeoffset = $row['timeoffset'];
+	}
+}
 $time_a = ($timeoffset * 120);
 $posttime = date("F j, Y, g:i a",time() + $time_a);
 

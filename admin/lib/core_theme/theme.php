@@ -37,10 +37,10 @@
          <ul>
          <li><a href="?page=home">Home</a>
          <ul> <!-- Dropdown Start -->
-         <li><a href="<?php echo $siteurl; ?>">View Site</a></li>
+         <li><a href="<?php View_Panel_Get_Siteurl(); ?>">View Site</a></li>
          </ul>
          </li>
-         <li><a href="?page=blogmanager">Manage Blogs</a>
+         <li><a href="?page=blogmanager">Blog Manager</a>
          <ul> <!-- Dropdown Start -->
          <li><a href="?page=addposts">Add Posts</a></li>
 		 <li><a href="?page=editposts">Edit Posts</a></li>
@@ -49,18 +49,26 @@
 		 <li><a href="?page=createblog">New Blog</a></li>
 		 <li><a href="?page=deleteblog">Remove Blog</a></li>
          <li><a href="?page=sidebar">Sidebars</a></li>
-         </ul> <!-- Dropdown End -->
+         </ul> 
+         <!-- Dropdown End -->
          </li>
+         <li>Other Managers</a>
+         <ul>
          <li><a href="?page=filemanager">File Manager</a></li>
          <li><a href="?page=usermanager">User Manager</a>
          <ul> <!-- Dropdown Start -->
          <li><a href="?page=register">New User</a></li>
-         </ul> <!-- Dropdown End -->
+         </ul> 
+         <!-- Dropdown End -->
          </li>
-         <li><a href="?page=settings">Settings</a></li>
+         <li><a href="?page=thememanager">Theme Manager</a></li>
+         <li><a href="?page=modmanager">Mod Manager</a></li>
+         </ul>
+         </li>
+         <li><a href="?page=settings">Panel Settings</a></li>
          <li><a href="?page=about">About</a></li>
          </ul>
-         </div>
+     </div>
 
 	<div id="main_content">
 		<div id="main_content_header">

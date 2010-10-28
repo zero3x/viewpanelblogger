@@ -1,3 +1,0 @@
-Give each post its own page.
-Add support for sidebars.
-Add public user signup.

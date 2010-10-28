@@ -7,7 +7,7 @@
 	              <p>1. 
 	              Choose a blog:
 	                <select name="table" id="table">
-	                  <?php View_Panel_Page_Lister(); ?>
+	                  <?php View_Panel_blog_lister(); ?>
 	                  </select>
 	              </p>
 	              <p>2. Are you sure you want to delete this blog (Type &quot;Yes&quot; or &quot;yes&quot;) ? 

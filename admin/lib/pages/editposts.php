@@ -4,7 +4,7 @@
     <form id="form1" name="form1" method="post" action="panel.php?page=editposts_next">
       <p>1. Select the blog you want to edit posts in:
         <select name="page" id="page">
-          <?php View_Panel_Page_Lister(); ?>
+          <?php View_Panel_blog_lister(); ?>
         </select>
       </p>
       <p>

@@ -21,11 +21,16 @@ if ($_POST["dbviewer_enabled"] == "enabled") {
 	$databaseviewer = "disabled";
 }
 
-$newwebsiteurl = $_POST["websiteurl"];
+$_POST["websiteurl"] = addslashes($_POST["websiteurl"]);
 $newmysqluser = $_POST["mysqlusernamenew"];
 $newmysqlpass = $_POST["mysqlpasswordnew"];
 $databaseloc = $_POST["databaselocation"];
 $databasename = $_POST["databasename"];
+$_POST['timeoffset'] = addslashes($_POST['timeoffset']);
+
+$insert = "INSERT INTO vpmainsettings (timeoffset, fileviewer, usermanager, uploadlimit, siteurl)
+VALUES ('".$_POST['timeoffset']."', '".$fileviewer."', '".$databaseviewer."', '', '".$_POST["websiteurl"]."')";
+mysql_query($insert);
 
 //Write variables
 $encryptpass = base64_encode($newmysqlpass);
@@ -35,8 +40,6 @@ $dbvariableshandle = "<?php \n
 \$dbpass ='".$encryptpass."'; \n
 \$dbname ='".$databasename."'; \n
 \$localdatabase ='".$databaseloc."'; \n
-\$siteurl ='".$newwebsiteurl."'; \n
-\$timeoffset ='".$timeoffset."'; \n
 \$fileview_enabled ='".$fileviewer."'; \n
 \$databaseview_enabled ='".$databaseviewer."'; \n
 ?>";

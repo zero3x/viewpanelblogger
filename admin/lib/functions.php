@@ -78,8 +78,8 @@ function copydir( $source, $target ) {
 	}
 }
 
-function View_Panel_Page_Lister() {
-	$result = mysql_query("SELECT * FROM page_lister");
+function View_Panel_blog_lister() {
+	$result = mysql_query("SELECT * FROM blog_lister");
 	while($row = mysql_fetch_array($result)) {
 		echo "<option>".$row['pageName']."</option>";
 	}
@@ -87,7 +87,7 @@ function View_Panel_Page_Lister() {
 }
 
 function View_Panel_Blog_Lister($output_get = 'blog') {
-	$result = mysql_query("SELECT * FROM page_lister");
+	$result = mysql_query("SELECT * FROM blog_lister");
 	echo "<option></option>";
 	while($row = mysql_fetch_array($result)) {
 		echo "<option value='".$_SERVER['SCRIPT_NAME']."?page=".$_GET[page]."&".$output_get."=".$row['pageName']."'>".$row['pageName']."</option>";
@@ -131,6 +131,13 @@ if(empty($path))
 foreach(glob($path."/*") as $fn)
 $ret += dirsize($fn);
 return $ret." bytes";*/
+}
+
+function View_Panel_Get_Siteurl() {
+	$result = mysql_query("SELECT siteurl FROM vpmainsettings");
+	while($row = mysql_fetch_array($result)) {
+		echo $row['siteurl'];
+	}
 }
 
 function View_Panel_Get_Version() {
@@ -332,7 +339,11 @@ function out_blogtitle($headertagstart = '<h1>', $headertagend = '</h1>', $logoi
 	if (isset($logoimage)) {
 		echo "<img src='".$logoimage."' />";
 	} else {
-	echo $headertagstart.$GLOBALS['blogname'].$headertagend;
+		$result = mysql_query("SELECT pageName FROM blog_lister");
+		$num_rows = mysql_num_rows($result);
+		while($row = mysql_fetch_array($result)) {
+			echo $headertagstart.$row['pageName'].$headertagend;
+		}
 	}
 }
 
@@ -343,7 +354,11 @@ function out_blogsubtitle($headertagstart = '<h2>', $headertagend = '</h2>') {
 	if (isset($GLOBALS['header_override']['subtitle']['secondtag'])) {
 		$headertagend = $GLOBALS['header_override']['introduction']['secondtag'];
 	}
-	echo $headertagstart.$GLOBALS['blogdesc'].$headertagend;
+	$result = mysql_query("SELECT pageDesc FROM blog_lister");
+		$num_rows = mysql_num_rows($result);
+		while($row = mysql_fetch_array($result)) {
+			echo $headertagstart.$row['pageDesc'].$headertagend;
+		}
 }
 
 function out_sidebar() {
