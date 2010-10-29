@@ -38,19 +38,6 @@ if(isset($_POST['submit_redirection'])) {
 </form>
 <form id="form2" name="form1" method="post" <?php echo "action='".$_SERVER['PHP_SELF']."?page=blogmanager&blog=".$tablenameclean."'"; ?>>
 <h2>Blog Options</h2>
-<p>Blog: <select name="page" id="page" ONCHANGE="location = this.options[this.selectedIndex].value;">
-      <?php View_Panel_Blog_Lister(); ?>
-    </select></p>
-<p>Theme: <select name="theme" id="theme">
-<?php View_Panel_Theme_Lister() ?>
-            </select></p>
-<p>Title:
-  <input name="tablename" type="text" id="tablename" size="30" maxlength="30" />
-</p>
-<p>Sub-Title: 
-  <input name="describetable" type="text" id="describetable" size="70" maxlength="70" />
-</p>
-<p><strong>Blog Header</strong> - all blogs include an empty header file. You can change theme function variables here before they are outputted. This is an advanced feature and can cause output problems if incorrectly done. Blogs made before version 2.5 R2 will not have a header file.</p>
 <p>
   <?php if(isset($_GET['blog'])) {
 	  $tablename = $_GET['blog'];
@@ -58,6 +45,20 @@ if(isset($_POST['submit_redirection'])) {
       $tablenameclean = strtolower($tablenameclean);
 	  } ?>
 </p>
+<p>Blog: <select name="page" id="page" ONCHANGE="location = this.options[this.selectedIndex].value;">
+      <?php View_Panel_Blog_Lister(); ?>
+    </select></p>
+<p>Theme: <select name="theme" id="theme">
+<?php View_Panel_Theme_Lister() ?>
+            </select></p>
+<p>Current Theme: <?php $get_theme = View_Panel_Theme_Current($tablename); echo $get_theme['name']; ?></p>
+<p>Title:
+  <input name="tablename" type="text" id="tablename" size="30" maxlength="30" />
+</p>
+<p>Sub-Title: 
+  <input name="describetable" type="text" id="describetable" size="70" maxlength="70" />
+</p>
+<p><strong>Blog Header</strong> - all blogs include an empty header file. You can change theme function variables here before they are outputted. This is an advanced feature and can cause output problems if incorrectly done. Blogs made before version 2.5 R2 will not have a header file.</p>
 <p> 
   
   <label>

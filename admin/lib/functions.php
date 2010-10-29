@@ -95,6 +95,15 @@ function View_Panel_Blog_Lister($output_get = 'blog') {
 	mysql_close($con);	
 	}
 
+function View_Panel_Theme_Current($blog) {
+	$blog = addslashes($blog);
+	$result = mysql_query("SELECT themeid FROM blog_lister WHERE pageName = '".$blog."'";);
+	while($row = mysql_fetch_array($result)) {
+		$vp_themeinformation = array("id"=>$row['themeid'],"name"=>$row['themename'],"author"=>$row['themeauthor']);
+		return($vp_themeinformation);
+	}
+}
+
 function View_Panel_Theme_Lister() {
 	  $result = mysql_query("SELECT * FROM viewpanel_themes");
 	  while($row = mysql_fetch_array($result)) {
