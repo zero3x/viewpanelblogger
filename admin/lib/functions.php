@@ -78,7 +78,7 @@ function copydir( $source, $target ) {
 	}
 }
 
-function View_Panel_blog_lister() {
+function View_Panel_Page_Lister() {
 	$result = mysql_query("SELECT * FROM blog_lister");
 	while($row = mysql_fetch_array($result)) {
 		echo "<option>".$row['pageName']."</option>";
@@ -96,20 +96,10 @@ function View_Panel_Blog_Lister($output_get = 'blog') {
 	}
 
 function View_Panel_Theme_Lister() {
-	$dir = "themes";
-	$themes = scandir($dir);
-if(empty($themes))
-   {
-     return false;
-   }
-
-	foreach($themes as $theme) {
-                
-		if ($theme == "." or $theme == ".." or $theme == "index.php") {
-		} else {
-		echo "<option name='$theme'>$theme</option>";
-		}
-	}
+	  $result = mysql_query("SELECT * FROM viewpanel_themes");
+	  while($row = mysql_fetch_array($result)) {
+		  echo "<option name='".$row['id']."' name='".$row['themename']."'>".$row['themename']."</option>";
+	  }
 }
 
 function get_num_users() {	

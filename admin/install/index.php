@@ -148,7 +148,7 @@ if( isset($_GET['action']) ) {
 		pageName longtext,
 		pageDesc longtext,
 		logoImage longtext,
-		theme longtext
+		themeid longtext
 		)";
 		
 		mysql_query($sql,$con);

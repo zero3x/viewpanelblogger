@@ -39,14 +39,16 @@ posttitle longtext,
 post longtext,
 author tinytext,
 date longtext,
-tags longtext
+tags longtext,
+attached_files longtext,
+
 )";
 
 mysql_query($sql,$con);
 echo "Your posts table has been created";
 
-$insert = "INSERT INTO blog_lister (pageName, pageDesc)
-VALUES ('".$tablename."', '".$tabledesc."')";
+$insert = "INSERT INTO blog_lister (pageName, pageDesc, themeid)
+VALUES ('".$tablename."', '".$tabledesc."', '".$theme."')";
 mysql_query($insert,$con);
 
 $insert = "INSERT INTO introductions (blogname) VALUES ('".$tablenameclean."')";
@@ -86,11 +88,20 @@ $infofile = "<?php
 include('lib/config.php');
 include('lib/header.php');
 include('../admin/lib/config.php');
-include('../admin/themes/".$theme."/theme.php');
+$result = mysql_query('SELECT themeid FROM blog_lister WHERE pageName ='".$tablename."');
+while($row = mysql_fetch_array($result)) {
+	$themeid = $row['themeid'];
+}
+$result = mysql_query('SELECT themelocation FROM viewpanel_themes WHERE themeid ='".$themeid."');
+while($row = mysql_fetch_array($result)) {
+	include('../admin/themes/".$row['themelocation']."/theme.php');
+}
 ?>";
 $infofilewrite = fopen("../../../".$tablenameclean."/index.php","w");
 fwrite($infofilewrite, $infofile);
 fclose($infofilewrite);
+
+
 
 //Write information file
 mkdir("../../../".$tablenameclean."/lib", 0777);
@@ -114,8 +125,25 @@ $infofilewrite = fopen("../../../".$tablenameclean."/lib/header.php","w");
 fwrite($infofilewrite, $infofile);
 fclose($infofilewrite);
 
-$url_facebook_parse = "../../../$tablenameclean/index.php";
-echo "<p>Blog Created! Click <a href='../../../$tablenameclean/'>here</a> to view it.</p>";
-echo "<p>And why not start sharing your blog with your facebook friends? <a name='fb_share' type='button' share_url='".$url_facebook_parse."' href='http://www.facebook.com/sharer.php'>Share</a><script src='http://static.ak.fbcdn.net/connect.php/js/FB.Share' type='text/javascript'></script></p>";
-echo "Or you could just go back to the <a href='../../login.php'>login</a> page.";
+$url_parse = "../../../$tablenameclean/index.php";
+echo "<p>Blog Created! Click <a href='../../../".$tablenameclean."/'>here</a> to view it.</p>
+<p>Or why not use the widget below to share your new blog with the world via Facebook, Twitter and more!</p>
+<div class='a2a_kit a2a_default_style'>
+<a class='a2a_dd' href='http://www.addtoany.com/share_save?linkurl=".$url_parse."&amp;linkname='>Share</a>
+<span class='a2a_divider'></span>
+<a class='a2a_button_facebook'></a>
+<a class='a2a_button_twitter'></a>
+<a class='a2a_button_email'></a>
+<a class='a2a_button_myspace'></a>
+<a class='a2a_button_stumbleupon'></a>
+<a class='a2a_button_google_buzz'></a>
+<a class='a2a_button_bebo'></a>
+<a class='a2a_button_digg'></a>
+</div>
+<script type='text/javascript'>
+var a2a_config = a2a_config || {};
+a2a_config.linkurl = '".$url_parse."';
+</script>
+<script type='text/javascript' src='http://static.addtoany.com/menu/page.js'></script>
+<p>Or you could just go back to the <a href='../../login.php'>login</a> page.</p>";
 ?>

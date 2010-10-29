@@ -1,11 +1,32 @@
 <?php if($_GET['action'] == "uploadtheme") {
-	$infofile = $_POST['blog_header'];
-	$infofile = stripslashes($infofile);
-	$tablenameclean = $_GET['blog'];
-	$infofilewrite = fopen("../".$tablenameclean."/lib/header.php","w");
-	fwrite($infofilewrite, $infofile);
-	fclose($infofilewrite);
-	echo "<div class='messagebox'>Header Saved!</div>";
+		if($_FILES['file']['type'] == "image/gif") {
+		$zip = new ZipArchive;
+			if ($zip->open($_FILES['file']['tmp_name']) === TRUE) {
+				$zip->extractTo("themes/".$_FILES['file']['name']."/");
+				$zip->close();
+				ob_start();
+				include "themes/".$_FILES['file']['name']."/theme.php";
+				ob_end_clean();
+				if (!isset($themeauthor)) {
+					$themeauthor = "Unknown Author";
+				}
+				$random = rand(0,999);
+				if (!isset($themename)) {
+					$themeauthor = "Untitled Theme ".$random;
+				}
+				$insert = "INSERT INTO viewpanel_themes (themename, themeauthor, themelocation)
+				VALUES ('".$themename."', '".$themeauthor."', '".$_FILES['file']['name']."')";
+				mysql_query($insert);
+				echo "<div class='messagebox'>Theme Uploaded</div>";
+			} else {
+				echo "<div class='messagebox'>Couldn't Extract Theme</div>";
+			}
+		} else {
+			echo "<div class='messagebox'>Theme Was Not A .zip</div>";
+}
+
+if($_GET['action'] == "uploadtheme") {
+	
 }
 ?>
 
@@ -25,7 +46,7 @@ echo"
   <tr>
     <td>".$row['themename']."</td>
     <td>".$row['themeauthor']."</td>
-    <td><a href='?action=removetheme'>Remove Theme</a></td>
+    <td><a href='?action=removetheme'>Remove Theme</a> | <a href='?action=edittheme&id=".$row['id']."'>Edit File</a></td>
   </tr> ";
 	}
   ?>
