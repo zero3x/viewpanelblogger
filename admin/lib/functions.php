@@ -97,7 +97,7 @@ function View_Panel_Blog_Lister($output_get = 'blog') {
 
 function View_Panel_Theme_Current($blog) {
 	$blog = addslashes($blog);
-	$result = mysql_query("SELECT themeid FROM blog_lister WHERE pageName = '".$blog."'";);
+	$result = mysql_query("SELECT themeid FROM blog_lister WHERE pageName = '".$blog."'");
 	while($row = mysql_fetch_array($result)) {
 		$vp_themeinformation = array("id"=>$row['themeid'],"name"=>$row['themename'],"author"=>$row['themeauthor']);
 		return($vp_themeinformation);

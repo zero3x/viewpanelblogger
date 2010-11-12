@@ -243,9 +243,16 @@ if( isset($_GET['action']) ) {
 		VALUES ('".$timeoffset."', 'enabled', 'disabled', '', '".$websiteUrl."')";
 		$add_member = mysql_query($insert);
 		
+		
+		//TODO: Check the theme directory and add all themes that are in it
+		
+		$insert = "INSERT INTO viewpanel_themes (themename, themeauthor, themelocation)
+		VALUES ('Multi Layer', 'Design: Free Website Templates Code: Zero3X ', 'multi_layer')";
+		$add_member = mysql_query($insert);
+		
 		mysql_close($con);
 		
-		chmod("../lib", 0755);
+		chmod("../lib", 0777);
 		
 		$installdonefile = fopen("../lib/installcomplete.txt","w");
 		$surlcontent = "DO NOT DELETE ME!";

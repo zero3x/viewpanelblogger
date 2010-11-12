@@ -50,6 +50,7 @@ echo "Your posts table has been created";
 $insert = "INSERT INTO blog_lister (pageName, pageDesc, themeid)
 VALUES ('".$tablename."', '".$tabledesc."', '".$theme."')";
 mysql_query($insert,$con);
+$bloglistertableid = mysql_insert_id();
 
 $insert = "INSERT INTO introductions (blogname) VALUES ('".$tablenameclean."')";
 mysql_query($insert,$con);
@@ -88,13 +89,14 @@ $infofile = "<?php
 include('lib/config.php');
 include('lib/header.php');
 include('../admin/lib/config.php');
-$result = mysql_query('SELECT themeid FROM blog_lister WHERE pageName ='".$tablename."');
-while($row = mysql_fetch_array($result)) {
-	$themeid = $row['themeid'];
+
+\$result = mysql_query('SELECT themeid FROM blog_lister WHERE id = ".$bloglistertableid."');
+while(\$row = mysql_fetch_array($result)) {
+\$themeid = \$row[themeid];
 }
-$result = mysql_query('SELECT themelocation FROM viewpanel_themes WHERE themeid ='".$themeid."');
-while($row = mysql_fetch_array($result)) {
-	include('../admin/themes/".$row['themelocation']."/theme.php');
+\$result = mysql_query('SELECT themelocation FROM viewpanel_themes WHERE themeid = \$themeid');
+while(\$row = mysql_fetch_array($result)) {
+	include(\"../admin/themes/\$row['themelocation']/theme.php\");
 }
 ?>";
 $infofilewrite = fopen("../../../".$tablenameclean."/index.php","w");
