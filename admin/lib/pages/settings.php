@@ -25,7 +25,6 @@ $result = mysql_query("SELECT * FROM vpmainsettings");
 		$databaseview_enabled = $row['usermanager'];
 		$timeoffset = $row['timeoffset'];
 	}
-}
 ?>
     <form id="form1" name="form1" method="post" action="lib/scripts/savesettings.php">
     <h1>Settings</h1>

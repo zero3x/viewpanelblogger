@@ -9,7 +9,6 @@
 ********************************************************************************
 *******************************************************************************/
 
-//TODO: Instead of copying the theme make an iclude file to it.
 
 include("../config.php");
 $tablename = $_POST["tablename"];
@@ -40,15 +39,20 @@ post longtext,
 author tinytext,
 date longtext,
 tags longtext,
-attached_files longtext,
-
+attached_files longtext
 )";
 
 mysql_query($sql,$con);
 echo "Your posts table has been created";
 
+$query = "SELECT id FROM viewpanel_themes WHERE themename = '".$theme."'";
+$mysql = mysql_query($query,$con);
+while($row = mysql_fetch_array($mysql)) {
+	$themetableid = $row['id'];
+}
+
 $insert = "INSERT INTO blog_lister (pageName, pageDesc, themeid)
-VALUES ('".$tablename."', '".$tabledesc."', '".$theme."')";
+VALUES ('".$tablename."', '".$tabledesc."', '".$themetableid."')";
 mysql_query($insert,$con);
 $bloglistertableid = mysql_insert_id();
 
@@ -90,13 +94,13 @@ include('lib/config.php');
 include('lib/header.php');
 include('../admin/lib/config.php');
 
-\$result = mysql_query('SELECT themeid FROM blog_lister WHERE id = ".$bloglistertableid."');
-while(\$row = mysql_fetch_array($result)) {
+\$result = mysql_query(\"SELECT themeid FROM blog_lister WHERE id = '".$bloglistertableid."'\");
+while(\$row = mysql_fetch_array(\$result)) {
 \$themeid = \$row[themeid];
 }
-\$result = mysql_query('SELECT themelocation FROM viewpanel_themes WHERE themeid = \$themeid');
-while(\$row = mysql_fetch_array($result)) {
-	include(\"../admin/themes/\$row['themelocation']/theme.php\");
+\$result = mysql_query(\"SELECT themelocation FROM viewpanel_themes WHERE id = '\$themeid'\");
+while(\$row = mysql_fetch_array(\$result)) {
+	include(\"../admin/themes/\".\$row['themelocation'].\"/theme.php\");
 }
 ?>";
 $infofilewrite = fopen("../../../".$tablenameclean."/index.php","w");
@@ -110,10 +114,11 @@ mkdir("../../../".$tablenameclean."/lib", 0777);
 $infofile = "<?php
 \$blogname = '".$tablename."';
 \$blogdesc = '".$tabledesc."';
-\$blogname = stripslashes($blogname);
-\$blogdesc = stripslashes($blogdesc);
+\$blogname = stripslashes(\$blogname);
+\$blogdesc = stripslashes(\$blogdesc);
 \$tablenameclean = preg_replace('/[^a-zA-Z0-9]/', '', '".$tablename."');
 \$tablenameclean = strtolower(\$tablenameclean);
+\$bloglistertableid = '".$bloglistertableid."';
 ?>";
 $infofilewrite = fopen("../../../".$tablenameclean."/lib/config.php","w");
 fwrite($infofilewrite, $infofile);

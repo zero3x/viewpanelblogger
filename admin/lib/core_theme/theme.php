@@ -52,7 +52,7 @@
          </ul> 
          <!-- Dropdown End -->
          </li>
-         <li>Other Managers</a>
+         <li><a href="#">Other Managers</a>
          <ul>
          <li><a href="?page=filemanager">File Manager</a></li>
          <li><a href="?page=usermanager">User Manager</a>

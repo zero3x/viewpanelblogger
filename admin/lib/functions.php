@@ -147,6 +147,10 @@ function View_Panel_Get_Version() {
 		return false;
 }
 }
+
+function View_Panel_File_Lister($username = '') {
+	
+}
 //Blog Functions
 function out_intro($border = '0', $introclass = 'introduction') {
 	include("lib/config.php");
@@ -338,8 +342,7 @@ function out_blogtitle($headertagstart = '<h1>', $headertagend = '</h1>', $logoi
 	if (isset($logoimage)) {
 		echo "<img src='".$logoimage."' />";
 	} else {
-		$result = mysql_query("SELECT pageName FROM blog_lister");
-		$num_rows = mysql_num_rows($result);
+		$result = mysql_query("SELECT pageName FROM blog_lister WHERE id = '".$GLOBALS[bloglistertableid]."'");
 		while($row = mysql_fetch_array($result)) {
 			echo $headertagstart.$row['pageName'].$headertagend;
 		}
@@ -353,8 +356,7 @@ function out_blogsubtitle($headertagstart = '<h2>', $headertagend = '</h2>') {
 	if (isset($GLOBALS['header_override']['subtitle']['secondtag'])) {
 		$headertagend = $GLOBALS['header_override']['introduction']['secondtag'];
 	}
-	$result = mysql_query("SELECT pageDesc FROM blog_lister");
-		$num_rows = mysql_num_rows($result);
+	$result = mysql_query("SELECT pageDesc FROM blog_lister WHERE id = '".$GLOBALS[bloglistertableid]."'");
 		while($row = mysql_fetch_array($result)) {
 			echo $headertagstart.$row['pageDesc'].$headertagend;
 		}

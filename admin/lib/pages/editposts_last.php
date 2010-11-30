@@ -1,12 +1,3 @@
-<?php
-/*$idtoedit = $_POST['postid'];
-$tablenameclean = $_GET['tablename'];
-
-$sql = "SELECT posttitle,post,author FROM $tablenameclean WHERE id = '$idtoedit'";
-$output = mysql_query($sql) or die(mysql_error());
-$row = mysql_fetch_array($output)
-*/
-?>
 <script type="text/javascript">
 <!--
 function header1() {
@@ -47,14 +38,21 @@ function yellowit() {
 }
 //-->
 </script>
+<?php
+if(isset($_GET[blog])) {
+	$tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $_GET[blog]);
+    $tablenameclean = strtolower($tablenameclean);
+}
+
+
+?>
     <h1>Edit Posts</h1>
     <p>Made a typo in a post? Want to fix it? Look no further than this page...</p>
-    <form id="form2" name="form2" method="post" action="<?php echo $_SERVER['PHP_SELF']."?page=editposts"; ?>">
+    <form id="form2" name="form2" method="post" <?php echo "action='".$_SERVER['SCRIPT_NAME']."?page=editposts&blog=".$tablenameclean."&action=blogselect'"; ?>>
       Select Blog: 
-      <select name="page" id="page">
+      <select name="page" id="page" ONCHANGE="location = this.options[this.selectedIndex].value;">
         <?php View_Panel_blog_lister(); ?>
-      </select>
-      <input type="submit" name="submit_blog" id="submit_blog" value="Continue" />
+                </select>
     </form>
     
 	

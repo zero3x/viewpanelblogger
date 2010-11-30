@@ -2,14 +2,11 @@ Change Log
 Change Log is more like a roadmap if viewed in the SVN as it shows what is planned, now what is done.
 
 ===2.6 'Xenon' RC1===
-Members can add comments to posts.
-Ability to edit theme files from the control panel.
+Blog's have moved from using mostly files to mostly MySQL.
+Posting script has become obsolete.
 Add tags to posts. 
-Mod Framework Base - Ability for public signup and more.
 Fixed error on BLOGNAME/lib/config.php on line 2.
-Added more blog manager options
 Blog theme is now set in MySQL database.
-Facebook share on blog creation will now work.
 page_lister table renamed to blog_lister.
 View_Panel_MySQL_Kill() now kills the MySQL connection and doesn't just give a warning.
 

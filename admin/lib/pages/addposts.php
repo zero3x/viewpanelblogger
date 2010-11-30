@@ -39,14 +39,48 @@ function yellowit() {
 //-->
 </script>
 
+<?php
+if(isset($_GET[blog])) {
+	$tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $_GET[blog]);
+    $tablenameclean = strtolower($tablenameclean);
+}
+
+if (isset($_GET[action])) {
+		$result = mysql_query("SELECT timeoffset FROM vpmainsettings");
+		while($row = mysql_fetch_array($result)) {
+			$timeoffset = $row['timeoffset'];
+}
+		
+	$time_a = ($timeoffset * 120);
+	$posttime = date("F j, Y, g:i a",time() + $time_a);
+	
+	$editbox = nl2br($_POST['edit']);
+	$editbox = mysql_real_escape_string($editbox);
+	$posttitle = nl2br($_POST['posttitle']);
+	$posttitle = mysql_real_escape_string($posttitle);
+	$postauthor = nl2br($_POST['author']);
+	$postauthor = mysql_real_escape_string($postauthor);
+	$tags = mysql_real_escape_string($_POST['tags']);
+	$tablename = $_GET["blog"];
+    $tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
+    $tablenameclean = strtolower($tablenameclean);
+	$insert ="INSERT INTO $tablenameclean(posttitle, post, author, date, tags, attached_files)
+VALUES('".$posttitle."','".$editbox."','".$postauthor."','".$posttime."','".$tags."','".$tags."')";
+	if (!mysql_query($insert,$con))
+  {
+  die('Error: ' . mysql_error());
+  echo " Please try again. If this problem persists please contact tech support. ";
+  }
+	echo "<div class='messagebox'>Post Added!</div>";
+}
+?>            
+<h1>Add A Post</h1>
             
-<h1>Add A Post		    </h1>
-            
-		    <form name="form1" method="post" action="lib/scripts/post.php">
+		    <form name="form1" method="post" <?php echo "action='".$_SERVER['SCRIPT_NAME']."?page=addposts&blog=".$tablenameclean."&action=insert'"; ?>>
             <h3>Choose A Blog </h3>
             <fieldset>
 	          <p>This post will be in the 
-	                <select name="page" id="page">
+	                 <select name="page" id="page" ONCHANGE="location = this.options[this.selectedIndex].value;">
         <?php View_Panel_blog_lister(); ?>
                 </select>
               blog</p></fieldset>
