@@ -233,8 +233,12 @@ if( isset($_GET['action']) ) {
 		timeoffset longtext,
 		fileviewer longtext,
 		usermanager longtext,
-		uploadlimit longtext
-		siteurl longtext
+		uploadlimit longtext,
+		siteurl longtext,
+		rankstoggle longtext,
+		maxupload longtext,
+		lockdown longtext,
+		signuptoggle longtext
 		)";
 		mysql_query($sql,$con);
 		echo "<p>Settings table created.</p>";

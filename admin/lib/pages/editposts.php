@@ -38,52 +38,32 @@ function yellowit() {
 }
 //-->
 </script>
-<?php
-if(isset($_GET[blog])) {
-	$tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $_GET[blog]);
-    $tablenameclean = strtolower($tablenameclean);
-	$sql = "SELECT * FROM $tablenameclean";
-	$query = mysql_query($sql);
-	while($row = mysql_fetch_array($query)){
-		$posttitle_option = "<option> $row['posttitle'];</option>"; 
-	}
-}
-?>
-
     <h1>Edit Posts</h1>
     <p>Made a typo in a post? Want to fix it? Look no further than this page...</p>
-    <form id="form2" name="form2" method="post" <?php echo "action='".$_SERVER['SCRIPT_NAME']."?page=sidebar&blog=".$tablenameclean."&action=postselect'"; ?>>
       Select Blog: 
       <select name="page" id="page" ONCHANGE="location = this.options[this.selectedIndex].value;">
-        <?php View_Panel_blog_lister(); ?>
+        <?php View_Panel_blog_lister("blog", "action=blogselected"); ?>
                 </select>
-    </form>
     
 	
 	
-	<?php if ($_GET['action'] == 'postselect') {
-		  $blog = $_GET['blog'];
-		  $blog = preg_replace("/[^a-zA-Z0-9]/", "", $blog);
-          $blog = strtolower($blog);
-		  $sql = "SELECT posttitle FROM $blog";
-		  $result = mysql_query($sql);
-		  
-		  while ($row = mysql_fetch_array($result)) {
-			  $title = $row["posttitle"];
-			  $option = "<option>$title</option>"; 
-		  echo"<form id='form3' name='form3' method='post' action='".$_SERVER['PHP_SELF']."?page=editposts&blog=".$blog."'>
-		  <p>Select Post: 
-		  <select name='page2' id='page2'>
-		   $posttitle_option
-		  </select> <input type='submit' name='submit_post' id='submit_post' value='Continue' /></p></form>";
-	  }
+	<?php 
+	if($_GET['action'] == 'blogselected') {
+		$tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", urldecode($_GET[blog]));
+		$tablenameclean = strtolower($tablenameclean);
+		$sql = "SELECT * FROM $tablenameclean";
+		$result = mysql_query($sql);
+		echo "<p>Select A Post: <select name='postselction' id='postselection' ONCHANGE='location = this.options[this.selectedIndex].value;'>";
+		while ($row = mysql_fetch_array($result)) {
+			echo "<option value='".$_SERVER['SCRIPT_NAME']."?page=".$_GET[page]."&blog=".urlencode($_GET['blog'])."&post=".$row[id]."&action=postselected'>".$row['posttitle']."</option>";
+		} 
+		echo "</select><p>";
 	}
-    ?>
-      
-    <?php if (isset($_POST['submit_post'])) {
-		$blog = $_GET['blog'];
-		$title = $_POST['page2'];
-		$sql = "SELECT id,post, posttitle, author FROM $blog WHERE posttitle='$title'";
+	
+	if($_GET['action'] == 'postselected') {
+		$tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", urldecode($_GET[blog]));
+		$tablenameclean = strtolower($tablenameclean);
+		$sql = "SELECT * FROM ".$tablenameclean." WHERE id = '".$_GET['post']."'";
 		$result = mysql_query($sql);
 		while ($row = mysql_fetch_array($result)) {
 			$post = $row['post'];
@@ -92,8 +72,24 @@ if(isset($_GET[blog])) {
 			$id = $row['id'];
 		}
 	}
-		?>
-    <form id="form1" name="form1" method="post" action='<?php echo "lib/scripts/editpost.php?id=".$id."&tablename=".$blog.""; ?> '
+	
+	if($_GET['action'] == 'editsubmit') {
+		$tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", urldecode($_GET[blog]));
+		$tablenameclean = strtolower($tablenameclean);
+		$idtoedit = $_GET['id'];
+		$editbox = nl2br($_POST['edit']);
+		$editbox = mysql_real_escape_string($editbox);
+		$posttitle = nl2br($_POST['posttitle']);
+		$posttitle = mysql_real_escape_string($posttitle);
+		$postauthor = nl2br($_POST['author']);
+		$postauthor = mysql_real_escape_string($postauthor);
+		$sql="UPDATE ".$tablenameclean." SET posttitle='".$posttitle."', post='".$editbox."', author='".$postauthor."' WHERE id = '".$_GET[post]."'";
+		$result = mysql_query($sql);
+		echo "<div class='messagebox'>Post Edited in ".$_GET[blog]."</div>";
+	}
+    ?>
+    
+    <form id='form1' name='form1' method='post' action='<?php echo "".$_SERVER['SCRIPT_NAME']."?page=".$_GET[page]."&blog=".urlencode($_GET['blog'])."&post=".$_GET[post]."&action=editsubmit"; ?>' >
       <table width="532" border="0">
 	                <tr>
 	                  <td width="60">Insert tag:</td>

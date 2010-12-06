@@ -78,6 +78,17 @@ function copydir( $source, $target ) {
 	}
 }
 
+function installedext($extension) {
+	$installed = get_loaded_extensions();  
+	foreach($installed as $install) {  
+		if(strtoupper($extension) == strtoupper($install)) {
+			return true;
+		}
+	}
+	return false;  
+}
+
+
 function View_Panel_Page_Lister() {
 	$result = mysql_query("SELECT * FROM blog_lister");
 	while($row = mysql_fetch_array($result)) {
@@ -86,11 +97,17 @@ function View_Panel_Page_Lister() {
 	mysql_close($con);	
 }
 
-function View_Panel_Blog_Lister($output_get = 'blog') {
+function View_Panel_Blog_Lister($output_get = 'blog', $secondget = '') {
 	$result = mysql_query("SELECT * FROM blog_lister");
 	echo "<option></option>";
 	while($row = mysql_fetch_array($result)) {
-		echo "<option value='".$_SERVER['SCRIPT_NAME']."?page=".$_GET[page]."&".$output_get."=".$row['pageName']."'>".$row['pageName']."</option>";
+		echo "<option ";
+		if (isset($_GET['blog'])) {
+			if ($row['pageName'] == $_GET['blog']) {
+				echo "selected='selected '";
+			}
+		}
+		echo "value='".$_SERVER['SCRIPT_NAME']."?page=".$_GET[page]."&".$output_get."=".urlencode($row['pageName'])."&".$secondget."'>".$row['pageName']."</option>";
 	}
 	mysql_close($con);	
 	}

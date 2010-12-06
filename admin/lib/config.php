@@ -16,7 +16,7 @@ include('databasesettings.php');
 //These variables are not to be edited. Doing so could destroy navigation... etc.
 $displayname = $_COOKIE['View_Panel_ID'];
 $page = $_GET['page'];
-
+$phpversion = phpversion();
 $panelversion = "2.6 'Xenon' RC1";     //The version of View Panel you are using
 
 //Start Functions

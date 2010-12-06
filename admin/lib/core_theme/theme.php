@@ -56,13 +56,9 @@
          <ul>
          <li><a href="?page=filemanager">File Manager</a></li>
          <li><a href="?page=usermanager">User Manager</a>
-         <ul> <!-- Dropdown Start -->
          <li><a href="?page=register">New User</a></li>
-         </ul> 
-         <!-- Dropdown End -->
-         </li>
-         <li><a href="?page=thememanager">Theme Manager</a></li>
          <li><a href="?page=modmanager">Mod Manager</a></li>
+          <li><a href="?page=thememanager">Theme Manager</a></li>
          </ul>
          </li>
          <li><a href="?page=settings">Panel Settings</a></li>

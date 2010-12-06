@@ -41,7 +41,7 @@ function yellowit() {
 
 <?php
 if(isset($_GET[blog])) {
-	$tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $_GET[blog]);
+	$tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", urldecode($_GET[blog]));
     $tablenameclean = strtolower($tablenameclean);
 }
 
@@ -61,9 +61,6 @@ if (isset($_GET[action])) {
 	$postauthor = nl2br($_POST['author']);
 	$postauthor = mysql_real_escape_string($postauthor);
 	$tags = mysql_real_escape_string($_POST['tags']);
-	$tablename = $_GET["blog"];
-    $tablenameclean = preg_replace("/[^a-zA-Z0-9]/", "", $tablename);
-    $tablenameclean = strtolower($tablenameclean);
 	$insert ="INSERT INTO $tablenameclean(posttitle, post, author, date, tags, attached_files)
 VALUES('".$posttitle."','".$editbox."','".$postauthor."','".$posttime."','".$tags."','".$tags."')";
 	if (!mysql_query($insert,$con))
@@ -76,7 +73,7 @@ VALUES('".$posttitle."','".$editbox."','".$postauthor."','".$posttime."','".$tag
 ?>            
 <h1>Add A Post</h1>
             
-		    <form name="form1" method="post" <?php echo "action='".$_SERVER['SCRIPT_NAME']."?page=addposts&blog=".$tablenameclean."&action=insert'"; ?>>
+		    <form name="form1" method="post" <?php echo "action='".$_SERVER['SCRIPT_NAME']."?page=addposts&blog=".$_GET['blog']."&action=insert'"; ?>>
             <h3>Choose A Blog </h3>
             <fieldset>
 	          <p>This post will be in the 

@@ -3,19 +3,20 @@ Change Log is more like a roadmap if viewed in the SVN as it shows what is plann
 
 ===2.6 'Xenon' RC1===
 Blog's have moved from using mostly files to mostly MySQL.
-Posting script has become obsolete.
+All scripts todo with posts and blog deletion have been removed. Blog creation script to be removed next version.
 Add tags to posts. 
 Fixed error on BLOGNAME/lib/config.php on line 2.
 Blog theme is now set in MySQL database.
 page_lister table renamed to blog_lister.
 View_Panel_MySQL_Kill() now kills the MySQL connection and doesn't just give a warning.
+Started work on the theme manager. Theme installing should work but is untested.
 
 ===2.5 R3 Stable===
 Fixed bugs to do with blog posting and editing.
 Fixed bugs to do with introduction editing.
 Fixed bugs to do with sidebar editing.
 About page now fetches version correctly.
-Settings Page niow displays help icons
+Settings Page now displays help icons
 Removed old core_theme images 
 
 ===2.5 'Reality' R2===

@@ -10,7 +10,7 @@ if ($page == "home") {
 	  } elseif ($page == "addposts") {
            include('lib/pages/addposts.php');
 	  } elseif ($page == "editposts") {
-           include('lib/pages/editposts_last.php');
+           include('lib/pages/editposts.php');
 	  } elseif ($page == "deleteposts") {
            include('lib/pages/deleteposts.php');
 	   } elseif ($page == "editintro") {
@@ -51,6 +51,8 @@ if ($page == "home") {
 		  include('lib/pages/profile.php');
 	  } elseif ($page == "sidebar") {
 	  include('lib/pages/sidebar.php');
+	  } elseif ($page == "thememanager") {
+           include('lib/pages/thememanager.php');
 	  } else {
 		  include('lib/pages/error404.php');
 	  }
