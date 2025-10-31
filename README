@@ -1,0 +1,36 @@
+# Viewpanelblogger 
+Hi and thanks for checking out Viewpanel Blogger. This is a 15/16 year old codebase and was the first "big" application I ever wrote. Originally stored on Google Code which shut down on January 5th 2016 this repository is simply a little piece of history for me and was retrieved from the [original archive](https://code.google.com/archive/p/viewpanelblogger/) on October 31st 2025. Feel free to explore the buggy (sometimes dangerous) bad practice a teenage me bashed together in PHP 5. The Readme from below is preserved as the final landing page was on the Google Code repository circa the start of 2011. The wiki here is also a direct copy from the original repo.
+
+---
+
+## HUGE NOTICE
+
+View Panel has been shutdown. All development has ceased.
+
+View Panel was created (using PHP) in October 2009 for a small website that wanted a news posting system. From there it's developed into a pretty much complete Bloging package.
+
+## Current Versions
+
+The current (stable) version is 2.6 RC1.
+
+## SVN Version
+
+The SVN holds the most up to date code. However, it won't be reliable and is only recommended to those wanting to program View Panel - not use it.
+
+## Features
+
+-   Make multiple blogs
+-   Theme support
+    
+    ### Blog Features
+    
+-   Add, Edit and Delete posts
+    
+-   Post titles
+-   Blog introductions
+-   Sidebars
+-   Each post gets a readmore button
+    
+    ### User Accounts
+    
+-   Create accounts
